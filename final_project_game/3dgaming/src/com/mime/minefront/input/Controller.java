@@ -8,6 +8,7 @@ public class Controller {
 	public static boolean walk = false;
 	public static boolean crouchWalk = false;
 	public static boolean runWalk = false;
+	public static boolean jumpRun = false;
 
 	public void tick(boolean forward, boolean back, boolean left, boolean right, boolean turnLeft, boolean turnRight,boolean jump,boolean crouch,boolean run) {
 		double rotationSpeed = 0.025;
@@ -55,7 +56,10 @@ public class Controller {
 		if (jump) {
 			y+= jumpHeight;
 			//run = false;
-						
+			}
+		
+		if(jumpRun) {
+			y+= jumpHeight;
 		}
 		
 		if (crouch) {
@@ -68,9 +72,12 @@ public class Controller {
 		
 		if(run) {
 			walkSpeed = 1;
-			walk = true;
+			runWalk = true;	
+			//jumpRun = true;
+			
 		}
 		
+				
 		if(!forward && !back && !left && !right && !turnLeft && !turnRight){
 			walk = false;
 		}
@@ -81,13 +88,16 @@ public class Controller {
 		
 		if(!run) {
 			runWalk = false;
+			//jumpRun = false; //new function
 		}
+		
+		
 
 		xa += (xMove * Math.cos(rotation) + zMove * Math.sin(rotation)) * walkSpeed;
 		za += (zMove * Math.cos(rotation) - xMove * Math.sin(rotation)) * walkSpeed;
 
 		x += xa;
-		y*= 0.9;
+		y*= 0.9;//max height
 		z += za;
 		xa *= 0.1;
 		za *= 0.1;

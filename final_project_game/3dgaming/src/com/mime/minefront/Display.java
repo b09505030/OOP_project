@@ -121,7 +121,7 @@ public class Display extends Canvas implements Runnable {
 			frames++;
 			//System.out.println("X: " + InputHandler.MouseX + "Y: " + InputHandler.MouseY); //check x y position
 			
-			newX = InputHandler.MouseX;
+			newX = InputHandler.MouseX;//mouse controller combine with input_handler
 			
 			if (newX > oldX) {
 				System.out.println("Right");
