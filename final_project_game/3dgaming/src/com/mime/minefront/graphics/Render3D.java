@@ -1,5 +1,7 @@
 package com.mime.minefront.graphics;
 
+import java.util.Random;
+
 import com.mime.minefront.Game;
 import com.mime.minefront.input.Controller;
 
@@ -7,6 +9,7 @@ public class Render3D extends Render {
 
 	public double[] zBuffer;
 	public double renderDistance = 5000;
+	Random random = new Random(); //from Screen.java
 
 	public Render3D(int width, int height) {
 		super(width, height);
@@ -80,6 +83,27 @@ public class Render3D extends Render {
 
 			}
 		}
+		
+		
+		//wall generate (render)
+		double xx = random.nextDouble();
+		double yy = random.nextDouble();
+		double zz = 1;
+		
+		int xPixel = (int)(xx / zz * height / 2 + width / 2);// /2
+		int yPixel = (int)(yy / zz * height / 2 + width / 2);
+		if (xPixel >= 0 && yPixel >=0) { //if object not in vision ,then don't rendering.
+			 
+		}
+		
+		pixels[10 + 10 * width] = 0xfffff;
+		
+		
+		
+		
+		
+		
+		
 	}
 
 	public void renderDistanceLimiter() {
