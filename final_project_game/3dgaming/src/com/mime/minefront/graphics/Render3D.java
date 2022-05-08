@@ -9,7 +9,7 @@ public class Render3D extends Render {
 
 	public double[] zBuffer;
 	public double renderDistance = 5000;
-	Random random = new Random(); // from Screen.java
+	
 
 	public Render3D(int width, int height) {
 		super(width, height);
@@ -31,7 +31,7 @@ public class Render3D extends Render {
 			walking = Math.sin(game.time / 6.0) * 0.8;
 		}
 
-		double rotation = 0;// game.controls.rotation; // game.time/100.0
+		double rotation =0;// game.controls.rotation; // game.time/100.0
 		double cosine = Math.cos(rotation);
 		double sine = Math.sin(rotation);
 
@@ -85,15 +85,19 @@ public class Render3D extends Render {
 		}
 
 		// wall generate (render)
-		double xx = random.nextDouble();
-		double yy = random.nextDouble();
-		double zz = 1;
+		Random random = new Random(); // from Screen.java
+		for (int i = 0; i < 10000; i++) {
+			double xx = random.nextDouble();
+			double yy = random.nextDouble();
+			double zz = 2; // minus to 
 
-		int xPixel = (int) (xx / zz * height / 2 + width / 2);// /2
-		int yPixel = (int) (yy / zz * height / 2 + width / 2);
-		if (xPixel >= 0 && yPixel >= 0 && xPixel < width && yPixel < height) { // if object not in vision ,then don't rendering.
-			pixels[10 + 10 * width] = 0xfffff;
+			int xPixel = (int) (xx / zz * height / 2 + width / 2);// /2
+			int yPixel = (int) (yy / zz * height / 2 + height / 2);
+			if (xPixel >= 0 && yPixel >= 0 && xPixel < width && yPixel < height) { // if object not in vision ,then
+																					// don't rendering.
+				pixels[xPixel + yPixel * width] = 0xfffff;
 
+			}
 		}
 
 	}
