@@ -9,7 +9,7 @@ public class Render3D extends Render {
 
 	public double[] zBuffer;
 	public double renderDistance = 5000;
-	Random random = new Random(); //from Screen.java
+	Random random = new Random(); // from Screen.java
 
 	public Render3D(int width, int height) {
 		super(width, height);
@@ -24,55 +24,55 @@ public class Render3D extends Render {
 		double right = game.controls.x / 0.8; // 右走
 		double up = game.controls.y;// Math.sin(game.time / 10.0) * 2 ;//
 		double walking = Math.sin(game.time / 6.0) * 0.5;
-		if(Controller.crouchWalk) {
+		if (Controller.crouchWalk) {
 			walking = Math.sin(game.time / 6.0) * 0.2;
 		}
-		if(Controller.runWalk) {
+		if (Controller.runWalk) {
 			walking = Math.sin(game.time / 6.0) * 0.8;
 		}
-		
-		double rotation = game.controls.rotation; // game.time/100.0
+
+		double rotation = 0;// game.controls.rotation; // game.time/100.0
 		double cosine = Math.cos(rotation);
 		double sine = Math.sin(rotation);
 
 		for (int y = 0; y < height; y++) {
 			double ceiling = (y - height / 2.0) / height;// changeable but need to use float
 
-			double z = (floorPosition + up ) / ceiling; // must after if ceiling statement or screen will rotation
-			
+			double z = (floorPosition + up) / ceiling; // must after if ceiling statement or screen will rotation
+
 			if (Controller.walk) {
-				z = (floorPosition + up + walking ) / ceiling;
-				
+				z = (floorPosition + up + walking) / ceiling;
+
 			}
-			
-			
+
 			if (ceiling < 0) {
-				z = (ceilingPosition - up ) / -ceiling; // fix distortion on screen
+				z = (ceilingPosition - up) / -ceiling; // fix distortion on screen
 				if (Controller.walk) {
-					z = (floorPosition - up - walking ) / -ceiling;
-					
+					z = (floorPosition - up - walking) / -ceiling;
+
 				}
 			}
 
- 			for (int x = 0; x < width; x++) {
+			for (int x = 0; x < width; x++) {
 				double depth = (x - width / 2.0) / height;
 				depth *= z;
-					
+
 				double xx = (depth * cosine + z * sine);
 				double yy = (z * cosine - depth * sine);
 				int xPix = (int) (xx + right);
 				int yPix = (int) (yy + forward);
-				
+
 				zBuffer[x + y * width] = z;
-				
+
 				/**
 				 * change to texture
 				 */
-				
-				pixels[x + y * width] = Texture.floor.pixels[(xPix & 7) + (yPix & 7) * 8];// using ((xPix & 15) * 16) | ((yPix & 15) * 16) << 8;
+
+				pixels[x + y * width] = Texture.floor.pixels[(xPix & 7) + (yPix & 7) * 8];// using ((xPix & 15) * 16) |
+																							// ((yPix & 15) * 16) << 8;
 				// and bitwise operator
-				// 
-				
+				//
+
 				if (z > 500) { // 消失點設定(可提升frame per second) 醜醜的
 					pixels[x + y * width] = 0;
 				}
@@ -83,27 +83,19 @@ public class Render3D extends Render {
 
 			}
 		}
-		
-		
-		//wall generate (render)
+
+		// wall generate (render)
 		double xx = random.nextDouble();
 		double yy = random.nextDouble();
 		double zz = 1;
-		
-		int xPixel = (int)(xx / zz * height / 2 + width / 2);// /2
-		int yPixel = (int)(yy / zz * height / 2 + width / 2);
-		if (xPixel >= 0 && yPixel >=0) { //if object not in vision ,then don't rendering.
-			 
+
+		int xPixel = (int) (xx / zz * height / 2 + width / 2);// /2
+		int yPixel = (int) (yy / zz * height / 2 + width / 2);
+		if (xPixel >= 0 && yPixel >= 0 && xPixel < width && yPixel < height) { // if object not in vision ,then don't rendering.
+			pixels[10 + 10 * width] = 0xfffff;
+
 		}
-		
-		pixels[10 + 10 * width] = 0xfffff;
-		
-		
-		
-		
-		
-		
-		
+
 	}
 
 	public void renderDistanceLimiter() {
