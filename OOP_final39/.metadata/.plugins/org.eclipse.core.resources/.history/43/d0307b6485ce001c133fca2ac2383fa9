@@ -1,0 +1,162 @@
+package com.mime.minefront.graphics;
+
+import java.util.Random;
+
+import com.mime.minefront.Game;
+import com.mime.minefront.input.Controller;
+
+public class Render3D extends Render {
+
+	public double[] zBuffer;
+	public double renderDistance = 5000;
+	// Random random = new Random();
+	private double forwardGlobal;
+
+	public Render3D(int width, int height) {
+		super(width, height);
+		zBuffer = new double[width * height];
+	}
+
+	public void floor(Game game) {
+
+		double floorPosition = 8;
+		double ceilingPosition = 8; // set 800 can get rid of ceiling
+
+		double forward = game.time % 100 / 20.0; // test for wall //game.controls.z; // 前進
+		forwardGlobal = forward;
+		double right = game.controls.x; // 右走
+		double up = game.controls.y;// Math.sin(game.time / 10.0) * 2
+		double walking = Math.sin(game.time / 6.0) * 0.5;
+		if (Controller.crouchWalk) { // 蹲下時不要晃那麼大
+			walking = Math.sin(game.time / 6.0) * 0.25;
+		}
+		if (Controller.runWalk) {
+			walking = Math.sin(game.time / 6.0) * 0.8;
+		}
+		double rotation = 0; // test for wall //game.controls.rotation; // 0; //game.time / 100.0; // animate
+								// the rotation
+		double cosine = Math.cos(rotation);
+		double sine = Math.sin(rotation);
+
+		for (int y = 0; y < height; y++) {
+			double ceiling = (y - height / 2.0) / height;
+
+			double z = (floorPosition + up) / ceiling;
+
+//			if (ceiling < 0) { // the same way movement
+//				ceiling = -ceiling;
+//			}
+
+			if (Controller.walk) {
+				z = (floorPosition + up + walking) / ceiling;
+
+			}
+
+			if (ceiling < 0) { // split up and down
+				z = (ceilingPosition - up) / -ceiling;
+				if (Controller.walk) {
+					z = (floorPosition - up - walking) / -ceiling;
+				}
+			}
+
+			for (int x = 0; x < width; x++) {
+				double depth = (x - width / 2.0) / height;
+				depth *= z;
+				double xx = depth * cosine + z * sine; // rotation
+				double yy = z * cosine - depth * sine;
+				int xPix = (int) (xx + right);
+				int yPix = (int) (yy + forward);
+				zBuffer[x + y * width] = z;
+
+				pixels[x + y * width] = Texture.floor.pixels[(xPix & 7) + (yPix & 7) * 8];
+
+				// pixels[x + y * width] = ((xPix & 15) * 16) | ((yPix & 15) * 16) << 8; // OR?,
+				// shift? ,// bitwise
+				// operator AND
+
+				if (z > 500) { // remove the infinite margin to increase the FPS
+					pixels[x + y * width] = 0;
+				} // public void renderDistanceLimiter() may replace it?
+					// System.out.println(xx);
+			}
+		}
+
+	}
+
+	public void walls() {
+		// 18
+		Random random = new Random(100); // 方形區域才不會一直閃動
+
+		for (int i = 0; i < 10000; i++) {
+			double xx = random.nextDouble() - 0; // 每+1往右移一格
+			double yy = random.nextDouble() - 0;
+			double zz = 1.5 - forwardGlobal / 16; // 深度每0.5會移動一格
+
+			int xPixel = (int) (xx / zz * height / 2 + width / 2);
+			int yPixel = (int) (yy / zz * height / 2 + height / 2);
+			if (xPixel >= 0 && yPixel >= 0 && xPixel < width && yPixel < height) {
+				pixels[xPixel + yPixel * width] = 0xfffff;
+			}
+		}
+		for (int i = 0; i < 10000; i++) {
+			double xx = random.nextDouble() - 1; // 每+1往右移一格
+			double yy = random.nextDouble() - 0;
+			double zz = 1.5 - forwardGlobal / 16; // 深度每0.5會移動一格
+
+			int xPixel = (int) (xx / zz * height / 2 + width / 2);
+			int yPixel = (int) (yy / zz * height / 2 + height / 2);
+			if (xPixel >= 0 && yPixel >= 0 && xPixel < width && yPixel < height) {
+				pixels[xPixel + yPixel * width] = 0xfffff;
+			}
+		}
+		for (int i = 0; i < 10000; i++) {
+			double xx = random.nextDouble() - 0; // 每+1往右移一格
+			double yy = random.nextDouble() - 1;
+			double zz = 1.5 - forwardGlobal / 16; // 深度每0.5會移動一格
+
+			int xPixel = (int) (xx / zz * height / 2 + width / 2);
+			int yPixel = (int) (yy / zz * height / 2 + height / 2);
+			if (xPixel >= 0 && yPixel >= 0 && xPixel < width && yPixel < height) {
+				pixels[xPixel + yPixel * width] = 0xfffff;
+			}
+		}
+		for (int i = 0; i < 10000; i++) {
+			double xx = random.nextDouble() - 1; // 每+1往右移一格
+			double yy = random.nextDouble() - 1;
+			double zz = 1.5 - forwardGlobal / 16; // 深度每0.5會移動一格
+
+			int xPixel = (int) (xx / zz * height / 2 + width / 2);
+			int yPixel = (int) (yy / zz * height / 2 + height / 2);
+			if (xPixel >= 0 && yPixel >= 0 && xPixel < width && yPixel < height) {
+				pixels[xPixel + yPixel * width] = 0xfffff;
+			}
+		}
+
+	}
+
+	public void renderDistanceLimiter() {
+		for (int i = 0; i < width * height; i++) {
+			int colour = pixels[i];
+			int brightness = (int) (renderDistance / (zBuffer[i])); // enable to fade off
+
+			if (brightness < 0) {
+				brightness = 0;
+			}
+
+			if (brightness > 255) {
+				brightness = 255;
+			}
+
+			int r = (colour >> 16) & 0xff;
+			int g = (colour >> 8) & 0xff;
+			int b = (colour) & 0xff;
+
+			r = r * brightness / 255;
+			g = g * brightness / 255;
+			b = b * brightness / 255;
+
+			pixels[i] = r << 16 | g << 8 | b;
+		}
+	}
+}
+//ep11 last
