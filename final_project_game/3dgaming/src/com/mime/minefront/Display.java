@@ -124,17 +124,17 @@ public class Display extends Canvas implements Runnable {
 			newX = InputHandler.MouseX;//mouse controller combine with input_handler
 			
 			if (newX > oldX) {
-				System.out.println("Right");
+				//System.out.println("Right");
 				Controller.MturnRight = true;
 			}
 			
 			if (newX < oldX) {
-				System.out.println("Left");
+				//System.out.println("Left");
 				Controller.MturnLeft = true;
 			}
 			
 			if (newX == oldX) {
-				System.out.println("Still");
+				//System.out.println("Still");
 				Controller.MturnLeft = false;
 				Controller.MturnRight = false;
 			}
@@ -144,15 +144,15 @@ public class Display extends Canvas implements Runnable {
 			newY = InputHandler.MouseY;
 			
 			if (newY > oldY) {
-				System.out.println("Down");
+				//System.out.println("Down");
 			}
 			
 			if (newY < oldY) {
-				System.out.println("Up");
+				//System.out.println("Up");
 			}
 			
 			if (newY == oldY) {
-				System.out.println("Still");
+				//System.out.println("Still");
 			}
 			
 			oldY = newY;
