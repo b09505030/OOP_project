@@ -1,0 +1,27 @@
+package com.mime.minefront.level;
+
+import java.util.Random;
+
+public class Level {
+	public Block[] blocks;
+	public final int width;
+	public final int height;
+
+	public Level(int width, int height) {
+		this.width = width;
+		this.height = height;
+		blocks = new Block[width * height];
+		Random random = new Random();
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				Block block = null;
+			}
+		}
+	}
+
+	public Block create(int x, int y) {
+		return blocks[x + y * width];
+
+	}
+
+}

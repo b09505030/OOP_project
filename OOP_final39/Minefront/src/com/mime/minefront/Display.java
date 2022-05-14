@@ -12,48 +12,56 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
-
 import javax.swing.JFrame;
 
 import com.mime.minefront.graphics.Render;
 import com.mime.minefront.graphics.Screen;
+import com.mime.minefront.gui.Launcher;
 import com.mime.minefront.input.Controller;
 import com.mime.minefront.input.InputHandler;
 
 public class Display extends Canvas implements Runnable {
-	private static final long serialVersionUID = 1L; //java thing?
+	private static final long serialVersionUID = 1L; // java thing?
+
+//	public static final int WIDTH = 800; // constant cannot be changed
+//	public static final int HEIGHT = 600;
 	
-	public static final int WIDTH = 800; //constant cannot be changed
-	public static final int HEIGHT = 600;
-	public static final String TITLE = "Minecraft 盜版"; //title
+	public static int width = 800;
+	public static int height = 600;
 	
-	private Thread thread; //do multiple tasks simultaneously, render multiple things at once
-	private Screen screen; //make an object
+	
+	public static final String TITLE = "Minecraft 盜版"; // title
+
+	private Thread thread; // do multiple tasks simultaneously, render multiple things at once
+	private Screen screen; // make an object
 	private Game game;
 	private BufferedImage img;
-	private boolean running = false; //isn't running at the moment
+	private boolean running = false; // isn't running at the moment
 	private Render render;
 	private int[] pixels;
 	private InputHandler input;
-	
+
 	private int newX = 0;
 	private int oldX = 0;
 	private int newY = 0;
 	private int oldY = 0;
-	private int fps; //print in frame
-	
+	private int fps; // print in frame
+	public static int selection = 0;
+
+	public static int MouseSpeed;
+
 	public Display() {
-		Dimension size = new Dimension(WIDTH, HEIGHT); //allow to put width and height into one object
+		Dimension size = new Dimension(getGameWidth(), getGameHeight()); // allow to put width and height into one object
 		setPreferredSize(size);
 		setMinimumSize(size);
 		setMaximumSize(size);
-		
-		screen = new Screen(WIDTH, HEIGHT);
-		//render = new Render(WIDTH, HEIGHT); //because change the subclass to Screen
+
+		screen = new Screen(getGameWidth(), getGameHeight());
+		// render = new Render(WIDTH, HEIGHT); //because change the subclass to Screen
 		game = new Game();
-		img = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB); //graphic things
-		pixels = ((DataBufferInt) img.getRaster().getDataBuffer()).getData(); //assign in Render
-		
+		img = new BufferedImage(getGameWidth(), getGameHeight(), BufferedImage.TYPE_INT_RGB); // graphic things
+		pixels = ((DataBufferInt) img.getRaster().getDataBuffer()).getData(); // assign in Render
+
 		input = new InputHandler();
 		addKeyListener(input);
 		addFocusListener(input);
@@ -61,28 +69,54 @@ public class Display extends Canvas implements Runnable {
 		addMouseMotionListener(input);
 	}
 	
-	private void start() { //initialize
-		if (running) //if running is true, exit this method
+	public int getGameWidth() {
+//		if(selection == 0) {
+//			width = 640;
+//		}
+//		if(selection == 1|| selection == -1) {
+//			width = 800;
+//		}
+//		if(selection == 2) {
+//			width = 1024;
+//		}
+		return width;
+	}
+	public int getGameHeight() {
+//		if(selection == 0) {
+//			height = 480;
+//		}
+//		if(selection == 1|| selection == -1) {
+//			height = 600;
+//		}
+//		if(selection == 2) {
+//			height = 768;
+//		}
+		return height;
+	}
+
+	void start() { // initialize
+		if (running) // if running is true, exit this method
 			return;
-		running = true; //initialize
+		running = true; // initialize
 		thread = new Thread(this);
 		thread.start();
 
-		//System.out.println("Working!"); //test
+		// System.out.println("Working!"); //test
 
 	}
-	public void stop() { //in order to use the applet
+
+	public void stop() { // in order to use the applet
 		if (!running)
 			return;
 		running = false;
-		try { //?
-			thread.join(); //Java執行緒的thread.join()可以讓目前正在執行的執行緒暫停
-		} catch (Exception e) { //java syntax
-			e.printStackTrace(); //?
+		try { // ?
+			thread.join(); // Java執行緒的thread.join()可以讓目前正在執行的執行緒暫停
+		} catch (Exception e) { // java syntax
+			e.printStackTrace(); // ?
 			System.exit(0);
 		}
 	}
-	
+
 	public void run() {
 		int frames = 0;
 		double unprocessedSeconds = 0;
@@ -90,13 +124,13 @@ public class Display extends Canvas implements Runnable {
 		double secondsPerTick = 1 / 60.0;
 		int tickCount = 0;
 		boolean ticked = false;
-		
-		//requestFocus(); //comments say!?
+
+		// requestFocus(); //comments say!?
 
 		while (running) {
 //			tick(); //handle the time, frame per second
 //			render(); //render thing to the screen
-			//Episode 7
+			// Episode 7
 			long currentTime = System.nanoTime();
 			long passedTime = currentTime - previousTime;
 			previousTime = currentTime;
@@ -109,8 +143,8 @@ public class Display extends Canvas implements Runnable {
 				ticked = true;
 				tickCount++;
 				if (tickCount % 60 == 0) {
-					//System.out.println(frames + "fps");
-					fps = frames; //print on frame
+					// System.out.println(frames + "fps");
+					fps = frames; // print on frame
 					previousTime += 1000;
 					frames = 0;
 				}
@@ -121,28 +155,31 @@ public class Display extends Canvas implements Runnable {
 			}
 			render();
 			frames++;
-			//test
-			//System.out.println("X: " + InputHandler.MouseX + "Y: " + InputHandler.MouseY); //check x y position
-			
+			// test
+			// System.out.println("X: " + InputHandler.MouseX + "Y: " +
+			// InputHandler.MouseY); //check x y position
+
 			newX = InputHandler.MouseX;
-			
+
 			if (newX > oldX) {
-				//System.out.println("Right");
+				// System.out.println("Right");
 				Controller.turnRight = true;
 			}
-			
+
 			if (newX < oldX) {
-				//System.out.println("Left");
+				// System.out.println("Left");
 				Controller.turnLeft = true;
 			}
-			
+
 			if (newX == oldX) {
-				//System.out.println("Still");
+				// System.out.println("Still");
 				Controller.turnLeft = false;
 				Controller.turnRight = false;
 			}
-			
-			oldX = newX;			
+
+			MouseSpeed = Math.abs(newX - oldX);
+
+			oldX = newX;
 //			
 //			newY = InputHandler.MouseY;
 //			
@@ -159,58 +196,40 @@ public class Display extends Canvas implements Runnable {
 //			}
 //			
 //			oldY = newY;
-			
+
 		}
 	}
-	
-	
+
 	private void tick() {
-		game.tick(input.key); //?
-		//requestFocus(); //comments say!?
+		game.tick(input.key); // ?
+		// requestFocus(); //comments say!?
 	}
-	
+
 	private void render() {
-		BufferStrategy bs = this.getBufferStrategy(); //graphic things, 只想執行一次
+		BufferStrategy bs = this.getBufferStrategy(); // graphic things, 只想執行一次
 		if (bs == null) {
-			createBufferStrategy(3); //3 dimensional
+			createBufferStrategy(3); // 3 dimensional
 			return;
 		}
-		
+
 		screen.render(game);
-		
-		for (int i = 0; i < WIDTH * HEIGHT; i++) {
+
+		for (int i = 0; i < getGameWidth() * getGameHeight(); i++) {
 			pixels[i] = screen.pixels[i];
 
 		}
-		
+
 		Graphics g = bs.getDrawGraphics();
-		g.drawImage(img, 0, 0, WIDTH, HEIGHT, null); //frame.pack(); after frame.setResizable(false); ?
-		g.setFont(new Font("Verdana",2,50)); //type,style(0:normal/1:bold/2:italics/3:bool and italics),size
+		g.drawImage(img, 0, 0, getGameWidth(), getGameHeight(), null); // frame.pack(); after frame.setResizable(false); ?
+		g.setFont(new Font("Verdana", 2, 50)); // type,style(0:normal/1:bold/2:italics/3:bool and italics),size
 		g.setColor(Color.YELLOW);
 		g.drawString(fps + " FPS", 20, 50);
 		g.dispose();
 		bs.show();
 	}
-	
-	
+
 	public static void main(String[] args) {
-		BufferedImage cursor = new BufferedImage(16,16,BufferedImage.TYPE_INT_ARGB); //invisible mouse
-		Cursor blank = Toolkit.getDefaultToolkit().createCustomCursor(cursor, new Point(0 , 0), "blank");
-		Display game = new Display();
-		JFrame frame = new JFrame();
-		frame.add(game); //adding frame into game
-		frame.pack();
-		frame.getContentPane().setCursor(blank); //invisible mouse
-		frame.setTitle(TITLE); //title
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //hit close button, want to terminate itself
-		//frame.setSize(WIDTH,HEIGHT); //set size; can be remove because:Dimension size = new Dimension(WIDTH, HEIGHT);
-		frame.setLocationRelativeTo(null); //this and frame.pack() =>in the center
-		frame.setResizable(false); //don't want to be resize
-		frame.setVisible(true);
-		
-		System.out.println("Running...");
-		
-		game.start();
+		new Launcher(0);
 	}
 
 }
