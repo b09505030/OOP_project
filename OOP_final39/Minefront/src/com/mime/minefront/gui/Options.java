@@ -2,18 +2,19 @@ package com.mime.minefront.gui;
 
 import java.awt.Choice;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.mime.minefront.Display;
+import com.mime.minefront.Configuration;
 
-public class Options extends Launcher {
+public class Options{// extends Launcher {
 	private static final long serialVersionUID = 1L;
 
 	private Choice resolution = new Choice();
@@ -26,14 +27,26 @@ public class Options extends Launcher {
 	private Rectangle rOK, rresolution;
 	int w = 0;
 	int h = 0;
-
+	private int button_width = 80;
+	private int button_height = 40;
+	
+	Configuration config = new Configuration();
+	JFrame frame = new JFrame();
+	JPanel window = new JPanel();
+	
 	public Options() {
-		super(1);
-		setTitle("Options");
-		setSize(new Dimension(width, height));
-		setLocationRelativeTo(null);
+		//super(1);
+		frame.setTitle("Options");
+		frame.setSize(new Dimension(width, height));
+		frame.add(window);
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+		window.setLayout(null);
 
 		drawButtons();
+		window.repaint();
 	}
 
 	private void drawButtons() {
@@ -69,11 +82,11 @@ public class Options extends Launcher {
 
 		OK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				frame.dispose();
+				new Launcher(0);
 				config.saveConfiguration("width", parseWidth());
 				config.saveConfiguration("height", parseHeight());
-				dispose();
-				new Launcher(0);
+				
 			}
 		});
 	}

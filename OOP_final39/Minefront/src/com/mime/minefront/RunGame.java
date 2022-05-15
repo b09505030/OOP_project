@@ -28,5 +28,9 @@ public class RunGame {
 		System.out.println("Running...");
 
 		game.start();
+		stopMenuThread();
+	}
+	private void stopMenuThread() {
+		Display.getLauncherInstance().stopMenu();
 	}
 }

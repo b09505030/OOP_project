@@ -13,23 +13,41 @@ public class InputHandler implements KeyListener,FocusListener, MouseMotionListe
 	public boolean[] key = new boolean[68836];
 	public static int MouseX;
 	public static int MouseY;
+	public static int MouseDX;
+	public static int MouseDY;
+	public static int MousePX;
+	public static int MousePY;
 	public static int MouseButton;
+	public static boolean dragged = false;
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		MouseButton = e.getButton();
-		
+		long previousTime = System.nanoTime();
+		while (MouseButton==1) {		
+			long currentTime = System.nanoTime();
+			long passedTime = currentTime - previousTime;
+			if(passedTime > 100000000) {
+				MouseButton = 0;
+			}
+			//previousTime = currentTime;
+		}
+		//System.out.println(MouseButton);
+		//MouseButton = 0;
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
+		MousePX = e.getX();
+		MousePY = e.getY();
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
+		dragged = false;
 		
 	}
 
@@ -48,7 +66,9 @@ public class InputHandler implements KeyListener,FocusListener, MouseMotionListe
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		dragged = true;
+		MouseDX = e.getX();
+		MouseDY = e.getY();
 	}
 
 	@Override
