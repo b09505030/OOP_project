@@ -40,6 +40,8 @@ public class Display extends Canvas implements Runnable {
 	private int newY = 0;
 	private int oldY = 0;
 	private int fps;//String
+	
+	public static int MouseSpeed;
 
 	public Display() {
 		Dimension size = new Dimension(WIDTH, HEIGHT);
@@ -138,24 +140,24 @@ public class Display extends Canvas implements Runnable {
 				Controller.MturnLeft = false;
 				Controller.MturnRight = false;
 			}
-			
+			MouseSpeed = Math.abs(newX - oldX);
 			oldX = newX;			
 			
-			newY = InputHandler.MouseY;
-			
-			if (newY > oldY) {
-				//System.out.println("Down");
-			}
-			
-			if (newY < oldY) {
-				//System.out.println("Up");
-			}
-			
-			if (newY == oldY) {
-				//System.out.println("Still");
-			}
-			
-			oldY = newY;
+//			newY = InputHandler.MouseY;
+//			
+//			if (newY > oldY) {
+//				System.out.println("Down");
+//			}
+//			
+//			if (newY < oldY) { 
+//				System.out.println("Up");
+//			}
+//			
+//			if (newY == oldY) {
+//				System.out.println("Still");
+//			}
+//			
+//			oldY = newY;
 			
 		}
 	}

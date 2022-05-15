@@ -14,6 +14,7 @@ public class InputHandler implements FocusListener, MouseMotionListener, MouseLi
 	public boolean[] key = new boolean[68836];
 	public static int MouseX;
 	public static int MouseY;
+	public static int MouseBotton;
 	
 
 	@Override
@@ -40,7 +41,7 @@ public class InputHandler implements FocusListener, MouseMotionListener, MouseLi
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		MouseBotton = e.getButton();
 
 	}
 

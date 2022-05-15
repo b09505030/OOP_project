@@ -24,17 +24,22 @@ public class Screen extends Render {
 		for (int i = 0; i < width * height; i++) {
 			pixels[i] = 0;
 		}
-		 
-		
-		//render ORDER
-		render.floor(game);//first render
-		render.renderDistanceLimiter();//second render
-		render.walls();//third render
+
+		// render ORDER
+		render.floor(game);// first render
+		render.renderWall(0, 0.5, 1.5, 1.5, 0);
+		render.renderWall(0, 0, 1, 1.5, 0);
+		render.renderWall(0, 0.5, 1, 1, 0);
+		render.renderWall(0.5, 0.5, 1, 1.5, 0);
+		render.renderWall(0.5, 0, 1.5, 1.5, 0);
+		render.renderWall(0, 0, 1.5, 1.0, 0);
+		render.renderWall(0.0, 0.5, 1.0, 1.0, 0);
+		render.renderWall(.5, .5, 1.0, 1.5, 0);
+		render.renderDistanceLimiter();// second render
+
+		// render.walls();//third render
 		draw(render, 0, 0);
-		
-		
-		
-		
+
 //		for (int i = 0; i < 50; i++) { // 256*256*200 = 13107200
 //			int anim0 = (int) (Math.sin(System.currentTimeMillis() % 1000.0 / 1000 * Math.PI * 2) * 100);
 //			int anim = (int) (Math.sin((game.time + i * 2) % 1000.0 / 100) * 100); // Math.sin((System.currentTimeMillis()
@@ -45,10 +50,7 @@ public class Screen extends Render {
 //
 //			// draw(test, (width - 256) / 2 + anim, (height - 256) / 2 + anim2); // name\xOffset\yOffset
 //		}
-		
-		
-		
-		
+
 	}
 
 }
