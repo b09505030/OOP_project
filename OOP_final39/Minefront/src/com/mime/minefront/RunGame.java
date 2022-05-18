@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
+import com.mime.minefront.Game;
+
 public class RunGame {
 	
 	public RunGame() {
@@ -16,6 +18,10 @@ public class RunGame {
 		JFrame frame = new JFrame();
 		frame.add(game); // adding frame into game
 		frame.pack();
+		
+		Thread thread;
+		
+		
 		// frame.getContentPane().setCursor(blank); //invisible mouse
 		frame.setTitle(Display.TITLE); // title
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // hit close button, want to terminate itself
@@ -26,11 +32,14 @@ public class RunGame {
 		frame.setVisible(true);
 
 		System.out.println("Running...");
-
+		
 		game.start();
 		stopMenuThread();
+		
+		
 	}
 	private void stopMenuThread() {
 		Display.getLauncherInstance().stopMenu();
 	}
+	
 }

@@ -52,13 +52,17 @@ public class Bitmap3D extends Bitmap {
 					double rr = 1 / 8.0;
 					double openness = 1 - ((DoorBlock) c).openness * 7 / 8;
 					if (e.solidRender) {
-						renderWall(xb + openness, zb + 0.5 - rr, xb, zb + 0.5 - rr, c.tex, (c.col & 0xfefefe) >> 1, 0, openness);
-						renderWall(xb, zb + 0.5 + rr, xb + openness, zb + 0.5 + rr, c.tex, (c.col & 0xfefefe) >> 1, openness, 0);
-						renderWall(xb + openness, zb + 0.5 + rr, xb + openness, zb + 0.5 - rr, c.tex, c.col, 0.5 - rr, 0.5 + rr);
+						renderWall(xb + openness, zb + 0.5 - rr, xb, zb + 0.5 - rr, c.tex, (c.col & 0xfefefe) >> 1, 0,
+								openness);
+						renderWall(xb, zb + 0.5 + rr, xb + openness, zb + 0.5 + rr, c.tex, (c.col & 0xfefefe) >> 1,
+								openness, 0);
+						renderWall(xb + openness, zb + 0.5 + rr, xb + openness, zb + 0.5 - rr, c.tex, c.col, 0.5 - rr,
+								0.5 + rr);
 					} else {
 						renderWall(xb + 0.5 - rr, zb, xb + 0.5 - rr, zb + openness, c.tex, c.col, openness, 0);
 						renderWall(xb + 0.5 + rr, zb + openness, xb + 0.5 + rr, zb, c.tex, c.col, 0, openness);
-						renderWall(xb + 0.5 - rr, zb + openness, xb + 0.5 + rr, zb + openness, c.tex, (c.col & 0xfefefe) >> 1, 0.5 - rr, 0.5 + rr);
+						renderWall(xb + 0.5 - rr, zb + openness, xb + 0.5 + rr, zb + openness, c.tex,
+								(c.col & 0xfefefe) >> 1, 0.5 - rr, 0.5 + rr);
 					}
 
 				}
@@ -114,7 +118,8 @@ public class Bitmap3D extends Bitmap {
 			}
 
 			for (int x = 0; x < width; x++) {
-				if (zBuffer[x + y * width] <= zd) continue;
+				if (zBuffer[x + y * width] <= zd)
+					continue;
 
 				double xd = (xCenter - x) / fov;
 				xd *= zd;
@@ -139,7 +144,8 @@ public class Bitmap3D extends Bitmap {
 					zBuffer[x + y * width] = -1;
 				} else {
 					zBuffer[x + y * width] = zd;
-					pixels[x + y * width] = Art.floors.pixels[((xPix & 15) + (tex % 8) * 16) + ((yPix & 15) + (tex / 8) * 16) * 128] * col;
+					pixels[x + y * width] = Art.floors.pixels[((xPix & 15) + (tex % 8) * 16)
+							+ ((yPix & 15) + (tex / 8) * 16) * 128] * col;
 				}
 			}
 		}
@@ -155,7 +161,8 @@ public class Bitmap3D extends Bitmap {
 		double yy = yc;
 		double zz = zc * rCos + xc * rSin;
 
-		if (zz < 0.1) return;
+		if (zz < 0.1)
+			return;
 
 		double xPixel = xCenter - (xx / zz * fov);
 		double yPixel = (yy / zz * fov + yCenter);
@@ -171,10 +178,14 @@ public class Bitmap3D extends Bitmap {
 		int yp0 = (int) Math.ceil(yPixel0);
 		int yp1 = (int) Math.ceil(yPixel1);
 
-		if (xp0 < 0) xp0 = 0;
-		if (xp1 > width) xp1 = width;
-		if (yp0 < 0) yp0 = 0;
-		if (yp1 > height) yp1 = height;
+		if (xp0 < 0)
+			xp0 = 0;
+		if (xp1 > width)
+			xp1 = width;
+		if (yp0 < 0)
+			yp0 = 0;
+		if (yp1 > height)
+			yp1 = height;
 		zz *= 4;
 		for (int yp = yp0; yp < yp1; yp++) {
 			double ypr = (yp - yPixel0) / (yPixel1 - yPixel0);
@@ -220,7 +231,8 @@ public class Bitmap3D extends Bitmap {
 
 		double zClip = 0.2;
 
-		if (zz0 < zClip && zz1 < zClip) return;
+		if (zz0 < zClip && zz1 < zClip)
+			return;
 
 		if (zz0 < zClip) {
 			double p = (zClip - zz0) / (zz1 - zz0);
@@ -239,11 +251,14 @@ public class Bitmap3D extends Bitmap {
 		double xPixel0 = xCenter - (xx0 / zz0 * fov);
 		double xPixel1 = xCenter - (xx1 / zz1 * fov);
 
-		if (xPixel0 >= xPixel1) return;
+		if (xPixel0 >= xPixel1)
+			return;
 		int xp0 = (int) Math.ceil(xPixel0);
 		int xp1 = (int) Math.ceil(xPixel1);
-		if (xp0 < 0) xp0 = 0;
-		if (xp1 > width) xp1 = width;
+		if (xp0 < 0)
+			xp0 = 0;
+		if (xp1 > width)
+			xp1 = width;
 
 		double yPixel00 = (u0 / zz0 * fov + yCenter);
 		double yPixel01 = (l0 / zz0 * fov + yCenter);
@@ -263,7 +278,8 @@ public class Bitmap3D extends Bitmap {
 			double pr = (x - xPixel0) * iw;
 			double iz = iz0 + iza * pr;
 
-			if (zBufferWall[x] > iz) continue;
+			if (zBufferWall[x] > iz)
+				continue;
 			zBufferWall[x] = iz;
 			int xTex = (int) ((ixt0 + ixta * pr) / iz);
 
@@ -272,14 +288,17 @@ public class Bitmap3D extends Bitmap {
 
 			int yp0 = (int) Math.ceil(yPixel0);
 			int yp1 = (int) Math.ceil(yPixel1);
-			if (yp0 < 0) yp0 = 0;
-			if (yp1 > height) yp1 = height;
+			if (yp0 < 0)
+				yp0 = 0;
+			if (yp1 > height)
+				yp1 = height;
 
 			double ih = 1 / (yPixel1 - yPixel0);
 			for (int y = yp0; y < yp1; y++) {
 				double pry = (y - yPixel0) * ih;
 				int yTex = (int) (16 * pry);
-				pixels[x + y * width] = Art.walls.pixels[((xTex) + (tex % 8) * 16) + (yTex + tex / 8 * 16) * 128] * color;
+				pixels[x + y * width] = Art.walls.pixels[((xTex) + (tex % 8) * 16) + (yTex + tex / 8 * 16) * 128]
+						* color;
 				zBuffer[x + y * width] = 1 / iz * 4;
 			}
 		}
@@ -300,8 +319,10 @@ public class Bitmap3D extends Bitmap {
 				int col = pixels[i];
 				int brightness = (int) (300 - zl * 6 * (xx * xx * 2 + 1));
 				brightness = (brightness + ((xp + yp) & 3) * 4) >> 4 << 4;
-				if (brightness < 0) brightness = 0;
-				if (brightness > 255) brightness = 255;
+				if (brightness < 0)
+					brightness = 0;
+				if (brightness > 255)
+					brightness = 255;
 
 				int r = (col >> 16) & 0xff;
 				int g = (col >> 8) & 0xff;

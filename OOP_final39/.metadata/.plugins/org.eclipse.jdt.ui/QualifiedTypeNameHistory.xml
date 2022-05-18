@@ -24,7 +24,6 @@
     <fullyQualifiedTypeName name="com.mime.minefront.gui.Launcher"/>
     <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
     <fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
-    <fullyQualifiedTypeName name="com.mime.minefront.RunGame"/>
     <fullyQualifiedTypeName name="java.awt.Font"/>
     <fullyQualifiedTypeName name="com.mime.minefront.Display"/>
     <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
@@ -32,4 +31,5 @@
     <fullyQualifiedTypeName name="java.awt.Canvas"/>
     <fullyQualifiedTypeName name="java.awt.Point"/>
     <fullyQualifiedTypeName name="com.mime.minefront.Configuration"/>
+    <fullyQualifiedTypeName name="com.mime.minefront.RunGame"/>
 </qualifiedTypeNameHistroy>

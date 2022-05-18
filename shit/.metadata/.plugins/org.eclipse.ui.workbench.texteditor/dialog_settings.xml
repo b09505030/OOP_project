@@ -6,7 +6,12 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="ifFree"/>
+			<item value="isFree"/>
+			<item value="is"/>
+			<item value="isfree"/>
 		</list>
 		<list key="replacehistory">
 		</list>
@@ -14,8 +19,8 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item key="DIALOG_X_ORIGIN" value="785"/>
 		<item key="DIALOG_Y_ORIGIN" value="247"/>
-		<item key="DIALOG_WIDTH" value="367"/>
-		<item key="DIALOG_HEIGHT" value="414"/>
-		<item key="DIALOG_FONT_NAME" value="1|Microsoft JhengHei UI|9.0|0|WINDOWS|1|-30|0|0|0|400|0|0|0|1|0|0|0|0|Microsoft JhengHei UI"/>
+		<item key="DIALOG_WIDTH" value="369"/>
+		<item key="DIALOG_HEIGHT" value="442"/>
+		<item key="DIALOG_FONT_NAME" value="1|Microsoft JhengHei UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Microsoft JhengHei UI"/>
 	</section>
 </section>

@@ -66,16 +66,21 @@ public class Entity {
 		}
 	}
 
-	protected boolean isFree(double xx, double yy) {
+	
+	protected boolean isFreelook(double xx, double yy) {
 		int x0 = (int) (Math.floor(xx + 0.5 - r));
 		int x1 = (int) (Math.floor(xx + 0.5 + r));
 		int y0 = (int) (Math.floor(yy + 0.5 - r));
 		int y1 = (int) (Math.floor(yy + 0.5 + r));
 
-		if (level.getBlock(x0, y0).blocks(this)) return false;
-		if (level.getBlock(x1, y0).blocks(this)) return false;
-		if (level.getBlock(x0, y1).blocks(this)) return false;
-		if (level.getBlock(x1, y1).blocks(this)) return false;
+		if (level.getBlock(x0, y0).blocks(this))
+			return false;
+		if (level.getBlock(x1, y0).blocks(this))
+			return false;
+		if (level.getBlock(x0, y1).blocks(this))
+			return false;
+		if (level.getBlock(x1, y1).blocks(this))
+			return false;
 
 		int xc = (int) (Math.floor(xx + 0.5));
 		int zc = (int) (Math.floor(yy + 0.5));
@@ -85,7 +90,8 @@ public class Entity {
 				List<Entity> es = level.getBlock(x, z).entities;
 				for (int i = 0; i < es.size(); i++) {
 					Entity e = es.get(i);
-					if (e == this) continue;
+					if (e == this)
+						continue;
 
 					if (!e.blocks(this, this.x, this.z, r) && e.blocks(this, xx, yy, r)) {
 						e.collide(this);
@@ -95,6 +101,40 @@ public class Entity {
 				}
 			}
 		}
+		return true;
+	}
+	
+	
+	protected boolean isFree(double xx, double yy) {
+//		int x0 = (int) (Math.floor(xx + 0.5 - r));
+//		int x1 = (int) (Math.floor(xx + 0.5 + r));
+//		int y0 = (int) (Math.floor(yy + 0.5 - r));
+//		int y1 = (int) (Math.floor(yy + 0.5 + r));
+//
+//		if (level.getBlock(x0, y0).blocks(this)) return false;
+//		if (level.getBlock(x1, y0).blocks(this)) return false;
+//		if (level.getBlock(x0, y1).blocks(this)) return false;
+//		if (level.getBlock(x1, y1).blocks(this)) return false;
+//
+//		int xc = (int) (Math.floor(xx + 0.5));
+//		int zc = (int) (Math.floor(yy + 0.5));
+//		int rr = 2;
+//		for (int z = zc - rr; z <= zc + rr; z++) {
+//			for (int x = xc - rr; x <= xc + rr; x++) {
+//				List<Entity> es = level.getBlock(x, z).entities;
+//				for (int i = 0; i < es.size(); i++) {
+//					Entity e = es.get(i);
+//					if (e == this) continue;
+//
+//					if (!e.blocks(this, this.x, this.z, r) && e.blocks(this, xx, yy, r)) {
+//						e.collide(this);
+//						this.collide(e);
+//						return false;
+//					}
+//				}
+//			}
+//		}
+//		return true;
 		return true;
 	}
 
