@@ -1,0 +1,52 @@
+package entity;
+
+import level.Level;
+
+public class Entity {
+
+	public double x, z;
+	public double r = 0.4;
+
+	public Level level;
+	public int xTileO = -1;
+	public int zTileO = -1;
+
+	protected boolean removed = false;
+
+	protected Entity() {
+	}
+	
+	
+	public final void updatePos() {//尚未研究未知實際用途
+		int xTile = (int) (x + 0.5);
+		int zTile = (int) (z + 0.5);
+		if (xTile != xTileO || zTile != zTileO) {
+			level.getBlock(xTileO, zTileO).removeEntity(this);
+
+			xTileO = xTile;
+			zTileO = zTile;
+
+			if (!removed) level.getBlock(xTileO, zTileO).addEntity(this);
+		}
+	}
+
+	public void remove() {
+		removed = true;
+	}
+
+	protected boolean isFree(double xx, double yy) {
+		int x0 = (int) (Math.floor(xx + 0.5 - r)); // public double r = 0.4; in declaration
+		int x1 = (int) (Math.floor(xx + 0.5 + r));
+		int y0 = (int) (Math.floor(yy + 0.5 - r));
+		int y1 = (int) (Math.floor(yy + 0.5 + r));
+//		if (level.getBlock(x0, y0).blocks(this)) {
+//			return false;
+//		}
+		
+		return true;
+	}
+
+	public void tick() {
+
+	}
+}

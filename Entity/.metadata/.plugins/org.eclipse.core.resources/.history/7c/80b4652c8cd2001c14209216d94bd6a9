@@ -1,7 +1,0 @@
-package com.mime.minefront.level;
-
-public class SolidWall extends Block {
-	public SolidWall() {
-		solid = true;
-	}
-}

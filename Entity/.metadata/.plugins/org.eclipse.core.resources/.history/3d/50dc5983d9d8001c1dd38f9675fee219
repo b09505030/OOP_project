@@ -1,0 +1,29 @@
+package entity;
+
+public class Entity {
+	
+	public double x, z;
+	public double r = 0.4;
+	protected boolean removed = false;
+	
+	
+	protected Entity() {
+	}
+	
+	public void remove() {
+		removed = true;
+	}
+	
+	protected boolean isFree(double xx,double yy) {
+		int x0 = (int) (Math.floor(xx + 0.5 - r)); // public double r = 0.4; in declaration
+		int x1 = (int) (Math.floor(xx + 0.5 + r));
+		int y0 = (int) (Math.floor(yy + 0.5 - r));
+		int y1 = (int) (Math.floor(yy + 0.5 + r));
+		return true;
+	}
+	
+	
+	public void tick() {
+		
+	}
+}

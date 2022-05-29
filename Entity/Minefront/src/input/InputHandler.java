@@ -8,8 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-public class InputHandler implements KeyListener, MouseMotionListener,
-		MouseListener, FocusListener {
+public class InputHandler implements KeyListener, MouseMotionListener, MouseListener, FocusListener {
 
 	public boolean[] key = new boolean[68836];
 	public static int MouseX;
@@ -21,8 +20,8 @@ public class InputHandler implements KeyListener, MouseMotionListener,
 	public static int MouseButton;
 	public static boolean dragged = false;
 
-	boolean forward, back, left, right, rleft, rright, jump, crouch, run = false;
-	
+	boolean forward, back, left, right, rleft, rright, jump, crouch, run, stop = false;
+
 	public void tick() {
 		forward = key[KeyEvent.VK_W];
 		back = key[KeyEvent.VK_S];
@@ -33,8 +32,9 @@ public class InputHandler implements KeyListener, MouseMotionListener,
 		jump = key[KeyEvent.VK_SPACE];
 		crouch = key[KeyEvent.VK_CONTROL];
 		run = key[KeyEvent.VK_SHIFT];
+		stop = key[KeyEvent.VK_P];
 	}
-	
+
 	public void focusGained(FocusEvent e) {
 
 	}
@@ -44,8 +44,7 @@ public class InputHandler implements KeyListener, MouseMotionListener,
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		
-		
+
 	}
 
 	public void mouseEntered(MouseEvent e) {
@@ -60,20 +59,18 @@ public class InputHandler implements KeyListener, MouseMotionListener,
 		MouseButton = e.getButton();
 		MousePX = e.getX();
 		MousePY = e.getY();
-		
+
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		
-		
-		
+
 		dragged = false;
 		MouseButton = 0;
-		
+
 	}
 
 	public void mouseDragged(MouseEvent e) {
-		
+
 		MouseDX = e.getX();
 		MouseDY = e.getY();
 		dragged = true;
@@ -81,7 +78,7 @@ public class InputHandler implements KeyListener, MouseMotionListener,
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		
+
 		MouseX = e.getX();
 		MouseY = e.getY();
 

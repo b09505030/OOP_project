@@ -1,0 +1,24 @@
+package entity;
+
+public class Entity {
+	
+	public double x, z;
+	protected boolean removed = false;
+	
+	
+	protected Entity() {
+	}
+	
+	public void remove() {
+		removed = true;
+	}
+	
+	protected boolean isFree() {
+		return false;
+	}
+	
+	
+	public void tick() {
+		
+	}
+}
