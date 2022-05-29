@@ -19,6 +19,7 @@ public class RunGame {
 		frame.setVisible(true);
 		frame.pack();
 		game.start();
+		
 		stopMenuThread();
 	}
 	

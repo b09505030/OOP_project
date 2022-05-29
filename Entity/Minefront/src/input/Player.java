@@ -7,14 +7,15 @@ public class Player extends Mob {
 	public double y;
 	// public double z;
 	public double rotation;
-	public double xa ;
-	public double za ;
+	public double xa;
+	public double za;
+
 	public double rotationa;
 	public static boolean turnLeft = false;
 	public static boolean turnRight = false;
-	public static boolean walk = false;//for sight shaking
-	public static boolean crouchWalk = false;//for sight shaking
-	public static boolean runWalk = false;//for sight shaking
+	public static boolean walk = false;// for sight shaking
+	public static boolean crouchWalk = false;// for sight shaking
+	public static boolean runWalk = false;// for sight shaking
 	public double walkSpeed = 0;
 
 	private InputHandler input;
@@ -31,11 +32,12 @@ public class Player extends Mob {
 
 		double jumpHeight = 0.9;
 		double crouchHeight = 0.3;
-		
+
 		xa = 0;
 		za = 0;
-		//System.out.println(walk);
-		
+
+		// System.out.println(walk);
+
 		if (input.forward) {
 			za++;
 			// zMove++;
@@ -68,6 +70,8 @@ public class Player extends Mob {
 		rotationa *= 0.5;
 
 		if (input.stop) {
+			x = 75;
+			z = 75;
 			xa = 0;
 			za = 0;
 		}
@@ -101,12 +105,12 @@ public class Player extends Mob {
 
 		if (!input.crouch) {
 			crouchWalk = false;
-			
+
 		}
 
 		if (!input.run) {
 			runWalk = false;
-			
+
 		}
 
 		// xa += ((xMove * Math.cos(rotation)) + (zMove * Math.sin(rotation)))
@@ -121,7 +125,7 @@ public class Player extends Mob {
 
 		// xa *= 0.1;
 		// za *= 0.1;
-		
+
 //		System.out.println("x = " + x );
 //		System.out.println("y = " + y );
 //		System.out.println("z = " + z );

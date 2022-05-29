@@ -41,27 +41,29 @@ public class Entity {
 	}
 
 	protected boolean isFree(double xx, double yy) {
-		int x0 = (int) (Math.floor(xx + 0.5 - r)); // public double r = 0.4; in declaration
-		int x1 = (int) (Math.floor(xx + 0.5 + r));
-		int y0 = (int) (Math.floor(yy + 0.5 - r));
-		int y1 = (int) (Math.floor(yy + 0.5 + r));
+		int x0 = (int) (Math.floor(xx + 0.5 - r-1.5)); // public double r = 0.4; in declaration
+		int x1 = (int) (Math.floor(xx + 0.5 + r-1.5));
+		int y0 = (int) (Math.floor(yy + 0.5 - r-1.4));
+		int y1 = (int) (Math.floor(yy + 0.5 + r-2.4));
 		
 		//System.out.println("check entity.java 44 = "+(x0));
+		//System.out.println("check entity.java 45 = "+(x1));
 		//System.out.println("check entity.java 49 = "+(level.getBlock(x0, y0).blocks(this)));
+		
 		if (level.getBlock(x0, y0).blocks(this)) {
-			System.out.println("x0, y0 exp");
+			//System.out.println("x0, y0 exp");
 			return false;
 		}
 		if (level.getBlock(x1, y0).blocks(this)) {
-			System.out.println("x1, y0 exp");
+			//System.out.println("x1, y0 exp");
 			return false;
 		}
 		if (level.getBlock(x0, y1).blocks(this)) {
-			System.out.println("x0, y1 exp");
+			//System.out.println("x0, y1 exp");
 			return false;
 		}
 		if (level.getBlock(x1, y1).blocks(this)) {
-			System.out.println("x1, y1 exp");
+			//System.out.println("x1, y1 exp");
 			return false;
 		}
 		

@@ -52,10 +52,11 @@ public class Level {
 	}
 
 	public void generateLevel() {
+		
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				Block block = null;
-				if (random.nextInt(28) == 0) {
+				if (random.nextInt(500) == 0) {
 					block = new SolidBlock();
 				} else {
 					block = new Block();
@@ -76,7 +77,7 @@ public class Level {
 	public Block getBlock(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height) {
 			//System.out.println("used");
-			
+			//System.out.println("width = "+width);
 			return solidWall;
 		}
 		//System.out.println("In Level.java 82 : "+(blocks[x + y * width]));

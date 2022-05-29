@@ -82,6 +82,7 @@ public class Display extends Canvas implements Runnable {
 		running = true;
 		thread = new Thread(this, "game");
 		thread.start();
+		
 	}
 
 	public synchronized void stop() {
