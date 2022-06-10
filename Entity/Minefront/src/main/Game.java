@@ -17,6 +17,9 @@ public class Game {
 	public Game(InputHandler input) {
 		player = new Player(input);
 		level = new Level(20, 20);
+		
+		
+		
 		level.addEntity(player);
 		
 	}

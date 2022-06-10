@@ -13,7 +13,6 @@
     <fullyQualifiedTypeName name="java.awt.Cursor"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
-    <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
     <fullyQualifiedTypeName name="com.mime.minefront.input.Controller"/>
     <fullyQualifiedTypeName name="com.mime.minefront.level.Level"/>
     <fullyQualifiedTypeName name="com.mime.minefront.level.Block"/>
@@ -24,7 +23,6 @@
     <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
     <fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
     <fullyQualifiedTypeName name="java.awt.Font"/>
-    <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
     <fullyQualifiedTypeName name="java.awt.Canvas"/>
     <fullyQualifiedTypeName name="java.awt.Point"/>
     <fullyQualifiedTypeName name="com.mime.minefront.Configuration"/>
@@ -34,8 +32,14 @@
     <fullyQualifiedTypeName name="com.mime.minefront.entity.Entity"/>
     <fullyQualifiedTypeName name="com.mime.minefront.input.InputHandler"/>
     <fullyQualifiedTypeName name="gui.Launcher"/>
-    <fullyQualifiedTypeName name="input.Player"/>
     <fullyQualifiedTypeName name="entity.Entity"/>
     <fullyQualifiedTypeName name="level.Level"/>
     <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="main.Game"/>
+    <fullyQualifiedTypeName name="input.Player"/>
+    <fullyQualifiedTypeName name="graphics.Texture"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
+    <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
 </qualifiedTypeNameHistroy>

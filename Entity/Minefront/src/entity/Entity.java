@@ -41,10 +41,10 @@ public class Entity {
 	}
 
 	protected boolean isFree(double xx, double yy) {
-		int x0 = (int) (Math.floor(xx + 0.5 - r-1.5)); // public double r = 0.4; in declaration
-		int x1 = (int) (Math.floor(xx + 0.5 + r-1.5));
-		int y0 = (int) (Math.floor(yy + 0.5 - r-1.4));
-		int y1 = (int) (Math.floor(yy + 0.5 + r-2.4));
+		int x0 = (int) (Math.floor(xx   - r)); // public double r = 0.4; in declaration
+		int x1 = (int) (Math.floor(xx   + r));
+		int y0 = (int) (Math.floor(yy   - r));
+		int y1 = (int) (Math.floor(yy   + r));
 		
 		//System.out.println("check entity.java 44 = "+(x0));
 		//System.out.println("check entity.java 45 = "+(x1));

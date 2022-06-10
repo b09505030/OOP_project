@@ -23,6 +23,7 @@ public class Render {
 				if (xPix < 0 || xPix >= width) {
 					continue;
 				}
+				
 				int alpha = render.pixels[x + y * render.width];
 
 				if (alpha > 0) {

@@ -17,12 +17,23 @@ public class Block {
 	public List<Sprite> sprites = new ArrayList<Sprite>();
 	public List<Entity> entities = new ArrayList<Entity>();
 	
+	public int tex = -1;
+	public int col = -1;
 	
-	//public Level level;//尚未了解用途
+	public int floorCol = -1;
+	public int ceilCol = -1;
+	
+	public int floorTex = -1;
+	public int ceilTex = -1;
+	
+	public Level level;//作為level的init 時會用到
+	
 	/**
 	 * 作為每個方塊的x、y座標
 	 */
 	public int x, y;
+	
+	public int id;
 	
 	
 
@@ -51,5 +62,10 @@ public class Block {
 	
 	public boolean blocks(Entity entity) {
 		return blocksMotion;
+	}
+
+	public void decorate(Level level, int x, int y) {
+		// TODO Auto-generated method stub
+		
 	}
 }

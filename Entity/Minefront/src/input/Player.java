@@ -70,8 +70,8 @@ public class Player extends Mob {
 		rotationa *= 0.5;
 
 		if (input.stop) {
-			x = 75;
-			z = 75;
+			x = 81;
+			z = 81;
 			xa = 0;
 			za = 0;
 		}

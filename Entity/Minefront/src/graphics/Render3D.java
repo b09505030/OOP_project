@@ -108,9 +108,9 @@ public class Render3D extends Render {
 		int size = 100;
 		for (int xBlock = -size; xBlock <= size; xBlock++) {
 			for (int zBlock = -size; zBlock <= size; zBlock++) {
-				Block block = level.create(xBlock, zBlock);
-				Block east = level.create(xBlock + 1, zBlock);
-				Block south = level.create(xBlock, zBlock + 1);
+				Block block = level.getBlock(xBlock, zBlock);
+				Block east = level.getBlock(xBlock + 1, zBlock);
+				Block south = level.getBlock(xBlock, zBlock + 1);
 
 				if (block.solid) {
 					if (!east.solid) {
@@ -136,9 +136,9 @@ public class Render3D extends Render {
 
 		for (int xBlock = -size; xBlock <= size; xBlock++) {
 			for (int zBlock = -size; zBlock <= size; zBlock++) {
-				Block block = level.create(xBlock, zBlock);
-				Block east = level.create(xBlock + 1, zBlock);
-				Block south = level.create(xBlock, zBlock + 1);
+				Block block = level.getBlock(xBlock, zBlock);
+				Block east = level.getBlock(xBlock + 1, zBlock);
+				Block south = level.getBlock(xBlock, zBlock + 1);
 
 				if (block.solid) {
 					if (!east.solid) {
@@ -165,9 +165,9 @@ public class Render3D extends Render {
 		
 		for (int xBlock = -size; xBlock <= size; xBlock++) {
 			for (int zBlock = -size; zBlock <= size; zBlock++) {
-				Block block = level.create(xBlock, zBlock);
-				Block east = level.create(xBlock + 1, zBlock);
-				Block south = level.create(xBlock, zBlock + 1);
+				Block block = level.getBlock(xBlock, zBlock);
+				Block east = level.getBlock(xBlock + 1, zBlock);
+				Block south = level.getBlock(xBlock, zBlock + 1);
 
 				if (block.solid) {
 					if (!east.solid) {
@@ -193,9 +193,9 @@ public class Render3D extends Render {
 		}
 		for (int xBlock = -size; xBlock <= size; xBlock++) {
 			for (int zBlock = -size; zBlock <= size; zBlock++) {
-				Block block = level.create(xBlock, zBlock);
-				Block east = level.create(xBlock + 1, zBlock);
-				Block south = level.create(xBlock, zBlock + 1);
+				Block block = level.getBlock(xBlock, zBlock);
+				Block east = level.getBlock(xBlock + 1, zBlock);
+				Block south = level.getBlock(xBlock, zBlock + 1);
 
 				if (block.solid) {
 					if (!east.solid) {
@@ -221,7 +221,7 @@ public class Render3D extends Render {
 		}
 		for (int xBlock = -size; xBlock <= size; xBlock++) {
 			for (int zBlock = -size; zBlock <= size; zBlock++) {
-				Block block = level.create(xBlock, zBlock);
+				Block block = level.getBlock(xBlock, zBlock);
 				for (int s = 0; s < block.sprites.size(); s++) {
 					Sprite sprite = block.sprites.get(s);
 
