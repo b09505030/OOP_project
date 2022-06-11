@@ -13,11 +13,12 @@ public class RunGame {
 		JFrame frame = new JFrame();
 		frame.add(game);
 		//frame.getContentPane().setCursor(blank);
-		frame.setTitle("ChernoTut");
+		frame.setTitle("Lamster");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setVisible(true);
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		game.start();
 		
 		stopMenuThread();

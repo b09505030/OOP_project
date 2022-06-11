@@ -88,7 +88,7 @@ public class Level {
 	public Level(int width, int height) {
 		this.width = width;
 		this.height = height;
-		blocks = new Block[width * height];
+		blocks = new Block[(width) * (height)];
 		generateLevel();
 	}
 
@@ -201,7 +201,7 @@ public class Level {
 //		if (col == 0x749327) return new SpiritWallBlock();
 		if (col == 0x1A2108) return new Block();
 //		if (col == 0x00C2A7) return new FinalUnlockBlock();
-//		if (col == 0x000056) return new WinBlock();
+		if (col == 0x8cfffb) return new WinBlock();
 
 		return new Block();
 	}
@@ -234,15 +234,22 @@ public class Level {
 		if (loaded.containsKey(name)) return loaded.get(name);
 
 		try {
-			BufferedImage img = ImageIO.read(Level.class.getResource("/level/" + name + ".png"));
-
+			
+			BufferedImage img = ImageIO.read(Level.class.getResource("/"+ name + ".png"));
+			
 			int w = img.getWidth();
+			
 			int h = img.getHeight();
+			
 			int[] pixels = new int[w * h];
+			
 			img.getRGB(0, 0, w, h, pixels, 0, w);
-
+			
+			
 			Level level = Level.byName(name);
+			
 			level.init(game, name, w, h, pixels);
+			
 			loaded.put(name, level);
 
 			return level;
@@ -254,12 +261,23 @@ public class Level {
 	
 	private static Level byName(String name) {
 		try {
+			
 			name = name.substring(0, 1).toUpperCase() + name.substring(1);
-			return (Level) Class.forName("com.mojang.escape.level." + name + "Level").newInstance();
+			
+			return (Level) Class.forName("level." + name + "Level").newInstance();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
+
+
+
+	public void win() {
+		game.win(player);
+		// TODO Auto-generated method stub
+		
+	}
+	
 	
 	
 

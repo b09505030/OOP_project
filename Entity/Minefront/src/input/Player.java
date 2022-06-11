@@ -30,7 +30,7 @@ public class Player extends Mob {
 		// double xMove = 0;
 		// double zMove = 0;
 
-		double jumpHeight = 0.9;
+		double jumpHeight = 5;
 		double crouchHeight = 0.3;
 
 		xa = 0;
@@ -70,8 +70,8 @@ public class Player extends Mob {
 		rotationa *= 0.5;
 
 		if (input.stop) {
-			x = 81;
-			z = 81;
+			x = level.xSpawn * 8.1;
+			z = level.xSpawn * 8.1;
 			xa = 0;
 			za = 0;
 		}
@@ -134,5 +134,11 @@ public class Player extends Mob {
 	public void tick(boolean forward, boolean back, boolean left, boolean right, boolean rleft, boolean rright,
 			boolean jump, boolean crouch, boolean run) {
 
+	}
+
+	public void win() {
+		level.win();
+		// TODO Auto-generated method stub
+		
 	}
 }
