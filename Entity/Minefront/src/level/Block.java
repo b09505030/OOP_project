@@ -5,6 +5,7 @@ import java.util.List;
 
 import entity.Entity;
 import graphics.Sprite;
+import graphics.Sprite2;
 
 public class Block {
 	
@@ -15,6 +16,7 @@ public class Block {
 	public static Block nonsolidWall = new NonSolidWall();
 	
 	public List<Sprite> sprites = new ArrayList<Sprite>();
+	public List<Sprite2> sprites2 = new ArrayList<Sprite2>();
 	public List<Entity> entities = new ArrayList<Entity>();
 	
 	public int tex = -1;
@@ -39,6 +41,10 @@ public class Block {
 
 	public void addSprite(Sprite sprite) {
 		sprites.add(sprite);
+	}
+	
+	public void addSprite2(Sprite2 sprite2) {
+		sprites2.add(sprite2);
 	}
 	
 	public void tick() {//尚未研究未知實際用途

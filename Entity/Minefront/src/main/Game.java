@@ -1,12 +1,10 @@
 package main;
 
+import graphics.Sound;
 import input.InputHandler;
 import input.Player;
 
-import java.awt.event.KeyEvent;
 
-import graphics.Render;
-import graphics.Texture;
 import level.Level;
 
 public class Game {
@@ -25,9 +23,10 @@ public class Game {
 		level.player = player;
 //		System.out.println(level.xSpawn);
 //		System.out.println(level.ySpawn);
-		player.x = level.xSpawn * 8.1;
-		player.z = level.ySpawn * 8.1;
+		player.x = level.xSpawn * 8;
+		player.z = level.ySpawn * 8;
 		player.ff=1;
+		Sound.cave5.play();
 		
 		level.addEntity(player);
 		

@@ -36,11 +36,14 @@
 	</section>
 	<section name="FatJarPackageWizard">
 		<item key="FatJarPackageWizardPage.ANTSCRIPT_SAVE" value="false"/>
-		<item key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION" value="C:\Users\88691\OOP_final"/>
+		<item key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION" value="C:\Users\88691\OOP_final.xml"/>
 		<item key="FatJarPackageWizardPage.LIBRARY_HANDLING" value="1"/>
-		<item key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME" value="Display - Minefront"/>
-		<item key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION" value="C:\Users\88691\Desktop\fkshit3.jar"/>
+		<item key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME" value="Display (1) - Minefront"/>
+		<item key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION" value="C:\Users\61101\Desktop\Lamster.jar"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\61101\Desktop\Lamster.jar"/>
+			<item value="C:\Users\61101\Desktop\L.jar"/>
+			<item value="C:\Users\61101\Desktop\ttest.jar"/>
 			<item value="C:\Users\88691\Desktop\fkshit3.jar"/>
 			<item value="C:\Users\88691\Desktop\fkshit2.jar"/>
 			<item value="C:\Users\88691\Desktop\fkshit.jar"/>

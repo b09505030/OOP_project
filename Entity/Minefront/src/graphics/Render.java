@@ -1,12 +1,10 @@
 package graphics;
 
-import main.Game;
 
 public class Render {
 	public final int width;
 	public final int height;
 	public final int[] pixels;
-	private String chars;
 
 	public Render(int width, int height) {
 		this.width = width;

@@ -1,6 +1,5 @@
 package entity;
 
-import entity.Entity;
 
 public class Mob extends Entity {
 	public double nx;
@@ -67,6 +66,9 @@ public class Mob extends Entity {
 		
 		//System.out.println("real_x = " + real_x );
 		//System.out.println("real_z = " + real_z );
+		//System.out.println("x = " + (int)x );
+		//System.out.println("z = " + (int)z );
+		
 		
 
 	}

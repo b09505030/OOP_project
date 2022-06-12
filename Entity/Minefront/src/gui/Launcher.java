@@ -8,36 +8,29 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.image.BufferStrategy;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
+
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.UIManager;
+
+import graphics.Sound;
 import main.Configuration;
 import main.Display;
 import main.RunGame;
-
-
 
 public class Launcher extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 
 	protected JPanel window = new JPanel();
-	private JButton play, options, help, quit;
-//	private JTextField twidth, theight;
-//	private JLabel lwidth, lheight;
-	private Rectangle rplay, roptions, rhelp, rquit;
+
 	Configuration config = new Configuration();
 
 	private int width = 800;
@@ -48,6 +41,8 @@ public class Launcher extends Canvas implements Runnable {
 	Thread thread;
 	JFrame frame = new JFrame();
 
+	public int cred = 0;
+
 	public Launcher(int id) {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -55,49 +50,49 @@ public class Launcher extends Canvas implements Runnable {
 			e.printStackTrace();
 		}
 		frame.setUndecorated(true);
-		//frame.setTitle("c8763 Launcher");
+		// frame.setTitle("c8763 Launcher");
 		frame.setSize(new Dimension(width, height));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//getContentPane().add(window);
+		// getContentPane().add(window);
 		frame.add(this);
 //		frame.add(display);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 		frame.setVisible(true);
 		window.setLayout(null);
-		//drawButtons();
-		
-		
-		if(id == 0) {
-			drawButtons();
-		}
-		
+		// drawButtons();
+
+//		if (id == 0) {
+//			drawButtons();
+//		}
+
 		InputHandler input = new InputHandler();
 		addKeyListener(input);
 		addFocusListener(input);
 		addMouseListener(input);
 		addMouseMotionListener(input);
-		
+
 		startMenu();
-		//display.start();
-		frame.repaint(); //button won't disappear until mouse go through
+		// display.start();
+		frame.repaint(); // button won't disappear until mouse go through
 	}
-	
+
 	public void updateFrame() {
-		if(InputHandler.dragged) {
+		if (InputHandler.dragged) {
 //			int x = getX();
 //			int y = getY();
-			Point p = frame.getLocation(); //Canvas and JFrame both have a method called "gerLocation"
-			frame.setLocation(p.x + InputHandler.MouseDX - InputHandler.MousePX, p.y + InputHandler.MouseDY - InputHandler.MousePY);
+			Point p = frame.getLocation(); // Canvas and JFrame both have a method called "gerLocation"
+			frame.setLocation(p.x + InputHandler.MouseDX - InputHandler.MousePX,
+					p.y + InputHandler.MouseDY - InputHandler.MousePY);
 		}
 	}
-	
+
 	public void startMenu() {
 		running = true;
 		thread = new Thread(this, "menu");
 		thread.start();
 	}
-	
+
 	public void stopMenu() {
 		try {
 			thread.join();
@@ -106,43 +101,48 @@ public class Launcher extends Canvas implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		while(running) {
+		while (running) {
 			try {
-			rendermenu();
+				if (cred  == 1) {
+					creditt();
+				} else if(cred == 0) {
+					rendermenu();
+				} 
 			} catch (IllegalStateException e) {
 				System.out.println("error");
 			}
 			updateFrame();
 		}
 	}
-	
+
 	private void rendermenu() throws IllegalStateException {
 		BufferStrategy bs = this.getBufferStrategy(); // graphic things, 只想執行一次
 		if (bs == null) {
 			createBufferStrategy(3); // 3 dimensional
 			return;
 		}
-		
+
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 800, 400);
-		
+
 		String FileName = "/menu.jpg";
-		//String FileName2 = "res/setting/config.xml";
+		// String FileName2 = "res/setting/config.xml";
 		InputStream iss = Display.class.getResourceAsStream(FileName);
-		//InputStream iss2 = Display.class.getResourceAsStream(FileName2);
+		// InputStream iss2 = Display.class.getResourceAsStream(FileName2);
 		try {
 			g.drawImage(ImageIO.read(iss), 0, 0, 800, 400, null);
-			if(InputHandler.MouseX > 690 && InputHandler.MouseX < 690+80 && InputHandler.MouseY > 100 && InputHandler.MouseY < 100+30) {
+			if (InputHandler.MouseX > 690 && InputHandler.MouseX < 690 + 80 && InputHandler.MouseY > 100
+					&& InputHandler.MouseY < 100 + 30) {
 				g.setColor(Color.WHITE);
 				g.setFont(new Font("verdana", 0, 30));
 				g.drawString("PLAY", 690, 130);
-				
-				if(InputHandler.MouseButton == 1) {
+
+				if (InputHandler.MouseButton == 1) {
 					config.loadConfiguration("/setting/config.xml");
 //					try {
 //						InputStream read = new FileInputStream(FileName2);
@@ -160,18 +160,29 @@ public class Launcher extends Canvas implements Runnable {
 //						e.printStackTrace();
 //					}
 					frame.dispose();
+//					try {
+//			            Thread.sleep(1000);
+//			        } catch (InterruptedException e) {
+//			            e.printStackTrace(); 
+//			        }
+//					
+//					System.out.println("AWAKE");
+					Sound.click.play();
 					new RunGame();
+					
 				}
 			} else {
 				g.setColor(Color.GRAY);
 				g.setFont(new Font("verdana", 0, 30));
 				g.drawString("PLAY", 690, 130);
 			}
-			if(InputHandler.MouseX > 625 && InputHandler.MouseX < 625+135 && InputHandler.MouseY > 140 && InputHandler.MouseY < 140+30) {
+			if (InputHandler.MouseX > 625 && InputHandler.MouseX < 625 + 135 && InputHandler.MouseY > 140
+					&& InputHandler.MouseY < 140 + 30) {
 				g.setColor(Color.WHITE);
 				g.setFont(new Font("verdana", 0, 30));
 				g.drawString("OPTIONS", 625, 170);
-				if(InputHandler.MouseButton == 1) {
+				if (InputHandler.MouseButton == 1) {
+					Sound.click.play();
 					new Options();
 				}
 			} else {
@@ -179,21 +190,28 @@ public class Launcher extends Canvas implements Runnable {
 				g.setFont(new Font("verdana", 0, 30));
 				g.drawString("OPTIONS", 625, 170);
 			}
-			if(InputHandler.MouseX > 685 && InputHandler.MouseX < 685+80 && InputHandler.MouseY > 180 && InputHandler.MouseY < 180+30) {
+			if (InputHandler.MouseX > 685 && InputHandler.MouseX < 685 + 80 && InputHandler.MouseY > 180
+					&& InputHandler.MouseY < 180 + 30) {
 				g.setColor(Color.WHITE);
 				g.setFont(new Font("verdana", 0, 30));
-				g.drawString("HELP", 685, 210);
+				g.drawString("CREDIT", 645, 210);
+				if (InputHandler.MouseButton == 1) {
+					Sound.click.play();
+					cred=1;
+				}
 			} else {
 				g.setColor(Color.GRAY);
 				g.setFont(new Font("verdana", 0, 30));
-				g.drawString("HELP", 685, 210);
+				g.drawString("CREDIT", 645, 210);
 			}
-			if(InputHandler.MouseX > 690 && InputHandler.MouseX < 690+80 && InputHandler.MouseY > 220 && InputHandler.MouseY < 220+30) {
+			if (InputHandler.MouseX > 690 && InputHandler.MouseX < 690 + 80 && InputHandler.MouseY > 220
+					&& InputHandler.MouseY < 220 + 30) {
 				g.setColor(Color.WHITE);
 				g.setFont(new Font("verdana", 0, 30));
 				g.drawString("EXIT", 690, 250);
-				if(InputHandler.MouseButton == 1) {
-					//System.out.println("e");
+				if (InputHandler.MouseButton == 1) {
+					Sound.click.play();
+					// System.out.println("e");
 					System.exit(0);
 				}
 			} else {
@@ -201,69 +219,64 @@ public class Launcher extends Canvas implements Runnable {
 				g.setFont(new Font("verdana", 0, 30));
 				g.drawString("EXIT", 690, 250);
 			}
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
+
 		g.dispose();
 		bs.show();
 	}
 
-	private void drawButtons() {
-		play = new JButton("Play!");
-		rplay = new Rectangle((width / 2) - (button_width / 2), 90, button_width, button_height);
-		play.setBounds(rplay);
-		window.add(play);
-		
-		options = new JButton("Options!");
-		roptions = new Rectangle((width / 2) - (button_width / 2), 140, button_width, button_height);
-		options.setBounds(roptions);
-		window.add(options);
-		
-		help = new JButton("Help!");
-		rhelp = new Rectangle((width / 2) - (button_width / 2), 190, button_width, button_height);
-		help.setBounds(rhelp);
-		window.add(help);
-		
-		quit = new JButton("Quit!");
-		rquit = new Rectangle((width / 2) - (button_width / 2), 240, button_width, button_height);
-		quit.setBounds(rquit);
-		window.add(quit);
-		
-		play.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				config.loadConfiguration("res/setting/config.xml");
-				frame.dispose();
-				new RunGame();
-				//System.out.println("Play!!");
+	private void creditt() throws IllegalStateException {
+		BufferStrategy bs = this.getBufferStrategy(); // graphic things, 只想執行一次
+		if (bs == null) {
+			createBufferStrategy(3); // 3 dimensional
+			return;
+		}
+
+		Graphics g = bs.getDrawGraphics();
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, 800, 400);
+
+		String FileName = "/credit.png";
+		// String FileName2 = "res/setting/config.xml";
+		InputStream iss = Display.class.getResourceAsStream(FileName);
+		// InputStream iss2 = Display.class.getResourceAsStream(FileName2);
+		try {
+			g.drawImage(ImageIO.read(iss), 0, 0, 800, 400, null);
+			
+			if(InputHandler.MouseX > 720 && InputHandler.MouseX < 720+80 && InputHandler.MouseY > 360&& InputHandler.MouseY < 360+30) {
+				g.setColor(Color.WHITE);
+				g.setFont(new Font("verdana", 0, 30));
+				g.drawString("BACK", 710, 390);
+				if (InputHandler.MouseButton == 1) {
+					
+					Sound.click.play();
+					//System.out.println("e");
+					cred=0;
+				}
+			} else {
+				g.setColor(Color.GRAY);
+				g.setFont(new Font("verdana", 0, 30));
+				g.drawString("BACK", 710, 390);
 			}
-		});
-		
-		options.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				frame.dispose();
-				new Options();
-			}
-		});
-		
-		help.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Play!!");
-			}
-		});
-		
-		quit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		g.dispose();
+		bs.show();
+	}
+	
+	public static void rest() {
+		System.out.println("processing");
+		//frame.setVisible(true);
 	}
 
-	
+
 
 }

@@ -2,43 +2,40 @@ package gui;
 
 
 import java.awt.Canvas;
-import java.awt.Choice;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
+
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+
 import javax.swing.UIManager;
 
+import graphics.Sound;
 import input.InputHandler;
-import main.Configuration;
+
 import main.Display;
-import main.RunGame;
+
 
 
 public class Gameover extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private int width = 800;
 	private int height = 400;
-	private JButton Ok;
-	private Rectangle rOk;
+
 	int w = 0;
 	int h = 0;
-	private int button_width = 80;
-	private int button_height = 30;
+	
 	
 	boolean running = false;
 	Thread thread;
@@ -64,7 +61,7 @@ public class Gameover extends Canvas implements Runnable {
 		
 		frame.repaint();
 		startMenu();
-		drawButtons();
+		
 		
 		InputHandler input = new InputHandler();
 		addKeyListener(input);
@@ -132,7 +129,14 @@ public class Gameover extends Canvas implements Runnable {
 				g.drawString("EXIT", 720, 390);
 				
 				if(InputHandler.MouseButton == 1) {
-					//System.out.println("e");
+					InputHandler.MouseButton = 0;
+					System.out.println(Display.lanucher);
+					//Display.getLanucher();
+					//frame.setVisible(false);
+					Sound.altar.play();
+					frame.dispose();
+					
+					//Launcher.rest();
 					System.exit(0);
 				}
 			} else {
@@ -152,21 +156,7 @@ public class Gameover extends Canvas implements Runnable {
 	}
 	
 	
-	public void drawButtons() {
-		
-		Ok = new JButton("OK");
-		rOk = new Rectangle((width - 100), (height - 70), button_width, button_height );
-		Ok.setBounds(rOk);
-		window.add(Ok);
-		
-		Ok.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				System.exit(0);
-			
-			}
-		});
-	}
+
 
 
 }

@@ -39,7 +39,7 @@ public class Display extends Canvas implements Runnable {
 
 	public static int mouseSpeed;
 
-	static Launcher lanucher;
+	public static Launcher lanucher;
 
 	public Display() {
 		Dimension size = new Dimension(getGameWidth(), getGameHeight());
@@ -108,7 +108,7 @@ public class Display extends Canvas implements Runnable {
 		// int tickCount = 0;
 		// boolean ticked = false;
 		int frames = 0;
-		int updates = 0;
+		//int updates = 0;
 		long timer = System.currentTimeMillis();
 		requestFocus();
 		while (running) {
@@ -119,7 +119,7 @@ public class Display extends Canvas implements Runnable {
 
 			if (delta >= 1) {
 				tick();
-				updates++;
+				//updates++;
 				delta--;
 			}
 
@@ -130,7 +130,7 @@ public class Display extends Canvas implements Runnable {
 			timer += 1000;
 			actualfps = frames;
 			frames = 0;
-			updates = 0;
+			//updates = 0;
 			}
 
 		}
@@ -170,7 +170,7 @@ public class Display extends Canvas implements Runnable {
 		g.drawImage(img, 0, 0, getGameWidth(), getGameHeight(), null);
 		g.setFont(new Font("Verdana", 2, 50));
 		g.setColor(Color.yellow);
-		g.drawString(actualfps + " FPS", 20, 50);
+		//g.drawString(actualfps + " FPS", 20, 50);
 		g.dispose();
 		bs.show();
 	}

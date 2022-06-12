@@ -1,6 +1,7 @@
 package input;
 
 import entity.Mob;
+import graphics.Sound;
 
 public class Player extends Mob {
 
@@ -18,6 +19,8 @@ public class Player extends Mob {
 	public static boolean runWalk = false;// for sight shaking
 	public double walkSpeed = 0;
 	public int ff = 1;
+	public int GY = 1;
+	public int nu = 1;
 
 	private InputHandler input;
 
@@ -73,8 +76,8 @@ public class Player extends Mob {
 		if (input.stop) {
 			//x = level.xSpawn * 8.1;
 			//z = level.xSpawn * 8.1;
-			x = 58 * 8.1;
-			z = 58* 8.1;
+			x = 58 * 8;
+			z = 58* 8;
 			xa = 0;
 			za = 0;
 		}
@@ -116,10 +119,21 @@ public class Player extends Mob {
 
 		}
 		
-		if(x >=60 * 8.1 && z >= 59 * 8.1 && ff==1) {
+		if(x >=60 * 8 && z >= 59 * 8 && ff==1) {
+			Sound.hal4.play();
 			win();
 			ff = 0;
 			
+		}
+		
+		if(x >= 44*8 && z >= 24*8 &&x <= (44+1)*8 && z <= (24+1)*8 && GY==1) {
+			Sound.NGGYU.play();
+			GY = 0;
+		}
+		
+		if(x >= 28*8 && z >= 36*8 &&x <= (28+1)*8 && z <= (36+1)*8 && nu==1) {
+			Sound.nuance1.play();
+			nu = 0;
 		}
 
 		// xa += ((xMove * Math.cos(rotation)) + (zMove * Math.sin(rotation)))

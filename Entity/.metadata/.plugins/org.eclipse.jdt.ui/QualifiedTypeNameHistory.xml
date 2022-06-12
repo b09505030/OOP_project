@@ -43,4 +43,6 @@
     <fullyQualifiedTypeName name="graphics.Texture"/>
     <fullyQualifiedTypeName name="graphics.Render"/>
     <fullyQualifiedTypeName name="main.Game"/>
+    <fullyQualifiedTypeName name="graphics.Sprite2"/>
+    <fullyQualifiedTypeName name="graphics.Sound"/>
 </qualifiedTypeNameHistroy>

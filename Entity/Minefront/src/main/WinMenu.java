@@ -2,16 +2,16 @@
 package main;
 
 import graphics.Render;
-import graphics.Texture;
+
 import input.Player;
 
 public class WinMenu extends Menu {
 	private int tickDelay = 30;
 
-	private Player player;
+	//private Player player;
 
 	public WinMenu(Player player) {
-		this.player = player;
+		//this.player = player;
 	}
 
 	public void render(Render target) {

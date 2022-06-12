@@ -2,10 +2,11 @@ package level;
 
 import entity.Entity;
 import graphics.Sprite;
+import graphics.Sprite2;
 import graphics.Texture;
 import input.Player;
 import main.Game;
-import main.RunGame;
+
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -75,6 +76,8 @@ public class Level {
 
 				if (x == 0 && y == 0) {
 					block.addSprite(new Sprite(61, 1, 60));
+					
+					block.addSprite2(new Sprite2(41, 1, 23));
 				}
 
 				blocks[x + y * w] = block;

@@ -1,0 +1,7 @@
+package graphics;
+import javax.sound.sampled.*;
+public class Sound {
+	public static Sound altar = loadSound("/snd/altar.wav");
+	public static Sound bosskill = loadSound("/snd/bosskill.wav");
+
+}

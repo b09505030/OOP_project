@@ -1,6 +1,6 @@
 package entity;
 
-import java.util.List;
+//import java.util.List;
 
 import level.Level;
 
@@ -67,43 +67,43 @@ public class Entity {
 			return false;
 		}
 		
-		int xc = (int) (Math.floor(xx + 0.5));
-		int zc = (int) (Math.floor(yy + 0.5));
-		int rr = 2;
+//		int xc = (int) (Math.floor(xx + 0.5));
+//		int zc = (int) (Math.floor(yy + 0.5));
+//		int rr = 2;
 
-		for (int z = zc - rr; z <= zc + rr; z++) {
-			for (int x = xc - rr; x <= xc + rr; x++) {
-				List<Entity> es = level.getBlock(x, z).entities;
-				for (int i = 0; i < es.size(); i++) {
-					Entity e = es.get(i);
-					if (e == this) continue;
-
-					if (!e.blocks(this, this.x, this.z, r) && e.blocks(this, xx, yy, r)) {
-						e.collide(this);
-						this.collide(e);
-						return false;
-					}
-				}
-			}
-		}
+//		for (int z = zc - rr; z <= zc + rr; z++) {
+//			for (int x = xc - rr; x <= xc + rr; x++) {
+//				List<Entity> es = level.getBlock(x, z).entities;
+//				for (int i = 0; i < es.size(); i++) {
+//					Entity e = es.get(i);
+//					if (e == this) continue;
+//
+//					if (!e.blocks(this, this.x, this.z, r) && e.blocks(this, xx, yy, r)) {
+//						e.collide(this);
+//						this.collide(e);
+//						return false;
+//					}
+//				}
+//			}
+//		}
 		return true;
 	}
 	
 	protected void collide(Entity entity) {
 	}
 	
-	public boolean blocks(Entity entity, double x2, double z2, double r2) {
-//		if (entity instanceof Bullet) {
-//			if (((Bullet) entity).owner == this) return false;
-//		}
-		if (x + r <= x2 - r2) return false;
-		if (x - r >= x2 + r2) return false;
-
-		if (z + r <= z2 - r2) return false;
-		if (z - r >= z2 + r2) return false;
-
-		return true;
-	}
+//	public boolean blocks(Entity entity, double x2, double z2, double r2) {
+////		if (entity instanceof Bullet) {
+////			if (((Bullet) entity).owner == this) return false;
+////		}
+//		if (x + r <= x2 - r2) return false;
+//		if (x - r >= x2 + r2) return false;
+//
+//		if (z + r <= z2 - r2) return false;
+//		if (z - r >= z2 + r2) return false;
+//
+//		return true;
+//	}
 	
 	
 

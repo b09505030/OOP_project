@@ -13,7 +13,7 @@ public class Render3D extends Render {
 	public double[] zBufferWall;
 	private double renderDistance = 4000;
 	private double forward, right, cosine, sine, up, walking;
-	private int spriteSheerWidth = 128;
+	private int spriteSheerWidth = 160;
 	Random random = new Random();
 
 	int c = 0;
@@ -235,6 +235,19 @@ public class Render3D extends Render {
 				}
 			}
 		}
+		
+		for (int xBlock = -size; xBlock <= size; xBlock++) {
+			for (int zBlock = -size; zBlock <= size; zBlock++) {
+				Block block = level.getBlock(xBlock, zBlock);
+				for (int s = 0; s < block.sprites2.size(); s++) {
+					Sprite2 sprite2 = block.sprites2.get(s);
+
+					renderSprite2(xBlock + sprite2.x, sprite2.y,
+							zBlock + sprite2.z, h);
+
+				}
+			}
+		}
 	}
 
 	public void renderSprite(double x, double y, double z, double hoffset) {
@@ -289,6 +302,70 @@ public class Render3D extends Render {
 
 				if (zBuffer[xp + yp * width] > rotZ) {
 					int col = Texture.blocks.pixels[(xTexture & 30) + 96
+							+ (yTexture & 30) * spriteSheerWidth];
+					if (col != 0xffff00ff ) {
+						pixels[xp + yp * width] = col;
+						zBuffer[xp + yp * width] = rotZ;
+					}
+
+				}
+			}
+		}
+
+	}
+	
+	public void renderSprite2(double x, double y, double z, double hoffset) {
+		double upCorrect = -0.125;
+		double rightCorrect = 0.0625;
+		double forwardCorrect = 0.0625;
+		double walkCorrect = 0.0625;
+
+		double xc = ((x / 2) - (right * rightCorrect)) * 2 + 0.5;
+		double yc = ((y / 2) - (up * upCorrect)) + (walking * walkCorrect) * 2
+				+ hoffset;
+		double zc = ((z / 2) - (forward * forwardCorrect)) * 2 + 0.5;
+
+		double rotX = xc * cosine - zc * sine;
+		double rotY = yc;
+		double rotZ = zc * cosine + xc * sine;
+
+		double xCenter = width / 2;
+		double yCenter = height / 2;
+
+		double xPixel = rotX / rotZ * height + xCenter;
+		double yPixel = rotY / rotZ * height + yCenter;
+
+		double xPixelL = xPixel - height / 2 / rotZ;
+		double xPixelR = xPixel + height / 2 / rotZ;
+
+		double yPixelL = yPixel - height / 2 / rotZ;
+		double yPixelR = yPixel + height / 2 / rotZ;
+
+		int xpl = (int) xPixelL;
+		int xpr = (int) xPixelR;
+		int ypl = (int) yPixelL;
+		int ypr = (int) yPixelR;
+
+		if (xpl < 0)
+			xpl = 0;
+		if (xpr > width)
+			xpr = width;
+		if (ypl < 0)
+			ypl = 0;
+		if (ypr > height)
+			ypr = height;
+
+		rotZ *= 5;
+		for (int yp = ypl; yp < ypr; yp++) {
+
+			double pixelRotationY = (yp - yPixelR) / (yPixelL - yPixelR);
+			int yTexture = (int) (pixelRotationY * 8*4);
+			for (int xp = xpl; xp < xpr; xp++) {
+				double pixelRotationX = (xp - xPixelR) / (xPixelL - xPixelR);
+				int xTexture = (int) (pixelRotationX * 8*4);
+
+				if (zBuffer[xp + yp * width] > rotZ) {
+					int col = Texture.blocks.pixels[(xTexture & 30) + 128
 							+ (yTexture & 30) * spriteSheerWidth];
 					if (col != 0xffff00ff ) {
 						pixels[xp + yp * width] = col;
