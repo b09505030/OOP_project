@@ -17,6 +17,7 @@ public class Player extends Mob {
 	public static boolean crouchWalk = false;// for sight shaking
 	public static boolean runWalk = false;// for sight shaking
 	public double walkSpeed = 0;
+	public int ff = 1;
 
 	private InputHandler input;
 
@@ -30,7 +31,7 @@ public class Player extends Mob {
 		// double xMove = 0;
 		// double zMove = 0;
 
-		double jumpHeight = 5;
+		double jumpHeight = 2.5;
 		double crouchHeight = 0.3;
 
 		xa = 0;
@@ -70,8 +71,10 @@ public class Player extends Mob {
 		rotationa *= 0.5;
 
 		if (input.stop) {
-			x = level.xSpawn * 8.1;
-			z = level.xSpawn * 8.1;
+			//x = level.xSpawn * 8.1;
+			//z = level.xSpawn * 8.1;
+			x = 58 * 8.1;
+			z = 58* 8.1;
 			xa = 0;
 			za = 0;
 		}
@@ -112,6 +115,12 @@ public class Player extends Mob {
 			runWalk = false;
 
 		}
+		
+		if(x >=60 * 8.1 && z >= 59 * 8.1 && ff==1) {
+			win();
+			ff = 0;
+			
+		}
 
 		// xa += ((xMove * Math.cos(rotation)) + (zMove * Math.sin(rotation)))
 		// * walkSpeed;
@@ -137,7 +146,10 @@ public class Player extends Mob {
 	}
 
 	public void win() {
+		System.out.println("1");
+		
 		level.win();
+		
 		// TODO Auto-generated method stub
 		
 	}

@@ -18,19 +18,19 @@ public class Entity {
 	protected Entity() {
 	}
 
-//	public final void updatePos() {// 尚未研究未知實際用途
-//		int xTile = (int) (x + 0.5);
-//		int zTile = (int) (z + 0.5);
-//		if (xTile != xTileO || zTile != zTileO) {
-//			level.getBlock(xTileO, zTileO).removeEntity(this);
-//
-//			xTileO = xTile;
-//			zTileO = zTile;
-//
-//			if (!removed)
-//				level.getBlock(xTileO, zTileO).addEntity(this);// addEntity又叫到updatePos?
-//		}
-//	}
+	public final void updatePos() {// 尚未研究未知實際用途
+		int xTile = (int) (x + 0.5);
+		int zTile = (int) (z + 0.5);
+		if (xTile != xTileO || zTile != zTileO) {
+			level.getBlock(xTileO, zTileO).removeEntity(this);
+
+			xTileO = xTile;
+			zTileO = zTile;
+
+			if (!removed)
+				level.getBlock(xTileO, zTileO).addEntity(this);// addEntity又叫到updatePos?
+		}
+	}
 
 	public boolean isRemoved() {// 尚未研究未知實際用途
 		return removed;
@@ -41,8 +41,8 @@ public class Entity {
 	}
 
 	protected boolean isFree(double xx, double yy) {
-		int x0 = (int) (Math.floor(xx   - r)); // public double r = 0.4; in declaration
-		int x1 = (int) (Math.floor(xx   + r));
+		int x0 = (int) (Math.floor(xx   - r  )); // public double r = 0.4; in declaration
+		int x1 = (int) (Math.floor(xx   + r ));
 		int y0 = (int) (Math.floor(yy   - r));
 		int y1 = (int) (Math.floor(yy   + r));
 		
@@ -67,25 +67,25 @@ public class Entity {
 			return false;
 		}
 		
-//		int xc = (int) (Math.floor(xx + 0.5));
-//		int zc = (int) (Math.floor(yy + 0.5));
-//		int rr = 2;
+		int xc = (int) (Math.floor(xx + 0.5));
+		int zc = (int) (Math.floor(yy + 0.5));
+		int rr = 2;
 
-//		for (int z = zc - rr; z <= zc + rr; z++) {
-//			for (int x = xc - rr; x <= xc + rr; x++) {
-//				List<Entity> es = level.getBlock(x, z).entities;
-//				for (int i = 0; i < es.size(); i++) {
-//					Entity e = es.get(i);
-//					if (e == this) continue;
-//
-//					if (!e.blocks(this, this.x, this.z, r) && e.blocks(this, xx, yy, r)) {
-//						e.collide(this);
-//						this.collide(e);
-//						return false;
-//					}
-//				}
-//			}
-//		}
+		for (int z = zc - rr; z <= zc + rr; z++) {
+			for (int x = xc - rr; x <= xc + rr; x++) {
+				List<Entity> es = level.getBlock(x, z).entities;
+				for (int i = 0; i < es.size(); i++) {
+					Entity e = es.get(i);
+					if (e == this) continue;
+
+					if (!e.blocks(this, this.x, this.z, r) && e.blocks(this, xx, yy, r)) {
+						e.collide(this);
+						this.collide(e);
+						return false;
+					}
+				}
+			}
+		}
 		return true;
 	}
 	

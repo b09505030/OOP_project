@@ -27,8 +27,8 @@ public class Mob extends Entity {
 		nx *= 1.1;//¦ì²¾
 		nz *= 1.1;//¦ì²¾
 		
-		double real_x = (x/8.1);
-		double real_z = (z/8.1);
+		double real_x = (x/8);
+		double real_z = (z/8);
 		
 		
 		int xSteps = (int) (Math.abs(nx) + 1);

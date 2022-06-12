@@ -44,7 +44,7 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
 	}
 
 	public void mouseClicked(MouseEvent e) {
-
+		
 	}
 
 	public void mouseEntered(MouseEvent e) {

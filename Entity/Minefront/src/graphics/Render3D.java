@@ -106,6 +106,9 @@ public class Render3D extends Render {
 
 		Level level = game.level;
 		int size = 100;
+		
+		
+		
 		for (int xBlock = -size; xBlock <= size; xBlock++) {
 			for (int zBlock = -size; zBlock <= size; zBlock++) {
 				Block block = level.getBlock(xBlock, zBlock);
@@ -163,6 +166,7 @@ public class Render3D extends Render {
 			}
 		}
 		
+				
 		for (int xBlock = -size; xBlock <= size; xBlock++) {
 			for (int zBlock = -size; zBlock <= size; zBlock++) {
 				Block block = level.getBlock(xBlock, zBlock);

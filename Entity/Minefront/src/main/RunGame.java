@@ -1,18 +1,18 @@
 package main;
 
-
-
-
-
 import javax.swing.JFrame;
 
+import gui.Gameover;
+import gui.Launcher;
+
 public class RunGame {
+	static JFrame frame = new JFrame();
 
 	public RunGame() {
 		Display game = new Display();
-		JFrame frame = new JFrame();
+
 		frame.add(game);
-		//frame.getContentPane().setCursor(blank);
+		// frame.getContentPane().setCursor(blank);
 		frame.setTitle("Lamster");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
@@ -20,10 +20,10 @@ public class RunGame {
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		game.start();
-		
+
 		stopMenuThread();
 	}
-	
+
 	private void stopMenuThread() {
 		try {
 			Display.getLanucher().stopMenu();
@@ -31,4 +31,12 @@ public class RunGame {
 			e.printStackTrace();
 		}
 	}
- }
+
+	public static void win() {
+		System.out.println("you win");
+		
+		
+		frame.dispose();
+		new Gameover();
+	}
+}

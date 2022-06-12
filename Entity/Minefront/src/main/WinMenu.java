@@ -1,3 +1,4 @@
+
 package main;
 
 import graphics.Render;
@@ -14,7 +15,8 @@ public class WinMenu extends Menu {
 	}
 
 	public void render(Render target) {
-		target.draw(Texture.logo, 0, 10, 0, 65, 160, 23, Texture.getCol(0xffffff));
+		System.out.println("you win!");
+		//target.draw(Texture.logo, 0, 10, 0, 65, 160, 23, Texture.getCol(0xffffff));
 
 		//int seconds = player.time / 60;
 		//int minutes = seconds / 60;

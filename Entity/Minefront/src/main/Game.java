@@ -5,6 +5,8 @@ import input.Player;
 
 import java.awt.event.KeyEvent;
 
+import graphics.Render;
+import graphics.Texture;
 import level.Level;
 
 public class Game {
@@ -25,6 +27,7 @@ public class Game {
 //		System.out.println(level.ySpawn);
 		player.x = level.xSpawn * 8.1;
 		player.z = level.ySpawn * 8.1;
+		player.ff=1;
 		
 		level.addEntity(player);
 		
@@ -34,11 +37,19 @@ public class Game {
 		time++;
 		level.tick();
 	}
+	public static int w = 640;
+	public static int h = 480;
+	public void win() {
+		System.out.println("3");
+		RunGame.win();
+		
+		//Render render = new Render(w, h);
+		//render.draw(Texture.logo, 0, 10, 0, 65, 160, 23, Texture.getCol(0xffffff));
 
-	public void win(Player player) {
-		System.out.println("you win!");
-		setMenu(new WinMenu(player));
+		//setMenu(new WinMenu(player));
 		// TODO Auto-generated method stub
+		
+		
 		
 	}
 	

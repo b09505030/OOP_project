@@ -34,13 +34,13 @@
     <fullyQualifiedTypeName name="gui.Launcher"/>
     <fullyQualifiedTypeName name="level.Level"/>
     <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="main.Game"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
     <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
     <fullyQualifiedTypeName name="entity.Entity"/>
     <fullyQualifiedTypeName name="input.Player"/>
-    <fullyQualifiedTypeName name="graphics.Render"/>
     <fullyQualifiedTypeName name="graphics.Texture"/>
+    <fullyQualifiedTypeName name="graphics.Render"/>
+    <fullyQualifiedTypeName name="main.Game"/>
 </qualifiedTypeNameHistroy>

@@ -1,5 +1,7 @@
 package graphics;
 
+import main.Game;
+
 public class Render {
 	public final int width;
 	public final int height;
@@ -9,10 +11,12 @@ public class Render {
 	public Render(int width, int height) {
 		this.width = width;
 		this.height = height;
+		
 		pixels = new int[height * width];
 	
 		
 	}
+	
 
 	public void draw(Render render, int xOffset, int yOffset) {
 		for (int y = 0; y < render.height; y++) {

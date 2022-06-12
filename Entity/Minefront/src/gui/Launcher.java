@@ -201,6 +201,7 @@ public class Launcher extends Canvas implements Runnable {
 				g.setFont(new Font("verdana", 0, 30));
 				g.drawString("EXIT", 690, 250);
 			}
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
